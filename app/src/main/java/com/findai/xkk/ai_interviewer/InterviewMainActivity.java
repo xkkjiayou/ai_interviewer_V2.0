@@ -416,6 +416,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                 if (faces.length > 0) {
                     hasface = true;
                     tv_has_face.setText("人脸比对工作已完成\n您的精神面貌良好");
+                    tv_has_face.setBackgroundColor(Color.parseColor("#50FF9933"));
 //                    System.out.println("看到人脸啦");
 //                    Rect face_rect = faces[0].rect;
 //                    System.out.println(faces[0].id);

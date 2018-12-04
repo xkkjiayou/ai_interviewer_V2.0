@@ -44,7 +44,7 @@
 
     <!--job 题库展示BTN -->
     <style name="job_tiku_btn_css">
-        <item name="android:background">#50b0b0b0</item>
+        <item name="android:background">#b0b0b0</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>

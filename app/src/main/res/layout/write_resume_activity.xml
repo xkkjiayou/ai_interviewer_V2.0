@@ -32,10 +32,23 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:button="@null"
                 android:gravity="center"
                 android:text="基本信息"
+                android:textSize="14dp" />
+
+            <RadioButton
+                android:id="@+id/rd_education_basicinfo"
+                android:layout_width="0dp"
+                android:background="#ffffff"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:button="@null"
+                android:gravity="center"
+                android:text="教育经历"
                 android:textSize="14dp" />
 
             <RadioButton
@@ -47,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:button="@null"
                 android:gravity="center"
                 android:text="工作经历"
@@ -60,7 +73,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="#ffffff"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:button="@null"
                 android:gravity="center"
                 android:text="自我介绍"

@@ -41,7 +41,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
-                        android:text="人脸比对工作尚未完成（入镜一次即可）"
+                        android:background="#506699cc"
+                        android:paddingBottom="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="20dp"
+                        android:text="人脸比对工作尚未完成\n（入镜一次即可）"
                         android:textColor="#ffffff"/>
                 </FrameLayout>
             </LinearLayout>
