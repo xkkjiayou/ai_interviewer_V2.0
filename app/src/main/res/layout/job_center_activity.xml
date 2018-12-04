@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/question_css"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,7 +14,17 @@
 
             </FrameLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+        android:layout_above="@+id/ll1"
+        android:layout_alignParentStart="true"
+        android:background="#bbbbbb">
+
+    </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll1"
                 style="@style/question_css"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -29,18 +29,21 @@
                     android:src="@mipmap/myinfo_userhead"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_user_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="4"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/tv_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#333333"
                     android:text="小康康"
                     android:textSize="15dp"/>
                 <TextView
+                    android:id="@+id/tv_userinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#888888"
@@ -95,6 +98,7 @@
 
         <!--简历库banner-->
         <LinearLayout
+            android:id="@+id/ll_myingo_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

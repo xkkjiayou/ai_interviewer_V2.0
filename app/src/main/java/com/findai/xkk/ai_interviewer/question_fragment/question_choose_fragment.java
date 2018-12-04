@@ -52,6 +52,7 @@ public class question_choose_fragment extends Fragment {
 //                System.out.println("------------------");
 //                String answer = ((RadioButton)group.getChildAt(checkedId)).getText().toString();
 //                System.out.println(answer);
+                System.out.println(checkedId);
                 callbackQuestion_choose_fragment.get_question_answer(checkedId);
             }
         });

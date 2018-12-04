@@ -28,15 +28,21 @@
                     android:layout_height="300dp"
                     android:layout_gravity="center_vertical|center_horizontal">
 
-                    <SurfaceView
-                        android:id="@+id/sv_camera_face"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
+                    <!--<SurfaceView-->
+                        <!--android:id="@+id/sv_camera_face"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent" />-->
                     <SurfaceView
                         android:id="@+id/sv_camera"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tv_has_face"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:text="人脸比对工作尚未完成（入镜一次即可）"
+                        android:textColor="#ffffff"/>
                 </FrameLayout>
             </LinearLayout>
             <!--问题区域 开始-->

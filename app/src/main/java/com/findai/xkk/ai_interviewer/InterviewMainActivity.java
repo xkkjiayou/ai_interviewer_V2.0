@@ -32,6 +32,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
@@ -64,14 +66,15 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     private FragmentManager fm = getSupportFragmentManager();
     private FragmentTransaction ft = fm.beginTransaction();
     private Matrix matrix = new Matrix();
-    private SurfaceView sv_camera_face;
-    private SurfaceHolder sv_camera_face_holder;
+//    private SurfaceView sv_camera_face;
+//    private SurfaceHolder sv_camera_face_holder;
     private Button btn_next;
     private boolean hasface = false;
     Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
             if (hasface) {
+//                System.out.println("人脸已存储");
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 try {
                     YuvImage image = new YuvImage(data, ImageFormat.NV21, size.width,
@@ -98,6 +101,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     private Question current_question;
     private Button btn_former;
     private Iterator<Question> questionIterator;
+    private TextView tv_has_face;
 
     /**
      * bitmap转为base64
@@ -175,12 +179,13 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hasface = false;
         setContentView(R.layout.interview_main_activity);
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("index_get_questionlist_bundle");
         questionList = (QuestionList) bundle.getSerializable("questionlist");
         questionIterator = get_question_iterator(questionList);
-
+        tv_has_face = findViewById(R.id.tv_has_face);
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -220,16 +225,16 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         }
 
         sv_camera = findViewById(R.id.sv_camera);
-        sv_camera_face = findViewById(R.id.sv_camera_face);
+//        sv_camera_face = findViewById(R.id.sv_camera_face);
         btn_next = findViewById(R.id.btn_next_question);
         btn_next.setOnClickListener(this);
 
         sh = sv_camera.getHolder();
-        sv_camera_face_holder = sv_camera_face.getHolder();
-        sv_camera_face.setZOrderOnTop(true);      // 这句不能少
-        sv_camera_face.getHolder().setFormat(PixelFormat.TRANSPARENT);
+//        sv_camera_face_holder = sv_camera_face.getHolder();
+//        sv_camera_face.setZOrderOnTop(true);      // 这句不能少
+//        sv_camera_face.getHolder().setFormat(PixelFormat.TRANSPARENT);
 //        sv_camera_face.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        sv_camera_face_holder.setFormat(PixelFormat.TRANSLUCENT);
+//        sv_camera_face_holder.setFormat(PixelFormat.TRANSLUCENT);
 //        sv_camera_face_holder.addCallback();
 
         sh.addCallback(new SurfaceCallback());
@@ -323,6 +328,12 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                 qwdfragment.setArguments(bundle);
                 ft.replace(R.id.fragment_question, qwdfragment);
                 break;
+            case 2:
+                bundle = new Bundle();
+                bundle.putSerializable("question", q);
+                qwdfragment.setArguments(bundle);
+                ft.replace(R.id.fragment_question, qwdfragment);
+                break;
             default:
                 break;
         }
@@ -379,39 +390,40 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
 
 //                Log.i("检测到了",face_rect.toString());
             try {
-
-                Canvas clear_canvas = sv_camera_face_holder.lockCanvas();
-                clear_canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                sv_camera_face_holder.unlockCanvasAndPost(clear_canvas);
+//                Canvas clear_canvas = sv_camera_face_holder.lockCanvas();
+//                clear_canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+//                sv_camera_face_holder.unlockCanvasAndPost(clear_canvas);
                 hasface = false;
+//                Toast.makeText(getBaseContext(),"请让人脸入镜一次，用以完成人脸比对工作。",Toast.LENGTH_LONG).show();
                 if (faces.length > 0) {
                     hasface = true;
-                    Rect face_rect = faces[0].rect;
+                    tv_has_face.setText("人脸比对工作已完成\n您的精神面貌良好");
+//                    System.out.println("看到人脸啦");
+//                    Rect face_rect = faces[0].rect;
 //                    System.out.println(faces[0].id);
-                    Paint paint = new Paint();
-                    paint.setColor(Color.parseColor("#222222"));
-                    paint.setStrokeWidth(2f);
-                    paint.setAlpha(180);
-                    paint.setStyle(Paint.Style.STROKE);
-                    Canvas face_canvas = sv_camera_face_holder.lockCanvas();
-                    face_canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                    //                    face_canvas.drawColor(Color.BLUE);
-
-                    prepareMatrix(matrix, true, 90, sv_camera.getWidth(), sv_camera.getHeight());
-                    RectF rf = new RectF(face_rect.left,
-                            face_rect.top,
-                            face_rect.right,
-                            face_rect.bottom);
-                    matrix.mapRect(rf);
-
-                    face_rect = new Rect();
-                    rf.round(face_rect);
-
-                    face_canvas.drawRect(new Rect(face_rect.left + 15,
-                            face_rect.top,
-                            face_rect.right,
-                            face_rect.bottom), paint);//绘制矩形
-                    sv_camera_face_holder.unlockCanvasAndPost(face_canvas);
+//                    Paint paint = new Paint();
+//                    paint.setColor(Color.parseColor("#222222"));
+//                    paint.setStrokeWidth(2f);
+//                    paint.setAlpha(180);
+//                    paint.setStyle(Paint.Style.STROKE);
+//                    Canvas face_canvas = sv_camera_face_holder.lockCanvas();
+//                    face_canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+//
+//                    prepareMatrix(matrix, true, 90, sv_camera.getWidth(), sv_camera.getHeight());
+//                    RectF rf = new RectF(face_rect.left,
+//                            face_rect.top,
+//                            face_rect.right,
+//                            face_rect.bottom);
+//                    matrix.mapRect(rf);
+//
+//                    face_rect = new Rect();
+//                    rf.round(face_rect);
+//
+//                    face_canvas.drawRect(new Rect(face_rect.left + 15,
+//                            face_rect.top,
+//                            face_rect.right,
+//                            face_rect.bottom), paint);//绘制矩形
+//                    sv_camera_face_holder.unlockCanvasAndPost(face_canvas);
                 }
             } catch (Exception ex) {
                 Log.i("出错了", "2");

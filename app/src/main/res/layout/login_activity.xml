@@ -1,25 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/question_panel"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@mipmap/login_bg"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:gravity="bottom"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="12">
 
-        <Button
-            android:id="@+id/btn_next_question"
-            android:layout_width="wrap_content"
-            android:background="@drawable/btn_selector"
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:background="#506699cc"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="12"
-            android:text="下一题" />
+
+            android:hint="请输入您的账号" />
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="#506699cc"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+
+            android:hint="请输入您的密码" />
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_btn_selector"
+            android:textColor="#ffffff"
+            android:text="登录"/>
+        <Button
+            android:id="@+id/btn_tiaozhuan_register"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_btn_selector"
+            android:backgroundTint="#88888888"
+            android:textColor="#ffffff"
+            android:text="新用户"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

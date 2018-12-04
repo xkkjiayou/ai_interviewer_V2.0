@@ -3,6 +3,7 @@ package com.findai.xkk.ai_interviewer.Http;
 import android.util.Log;
 
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
+import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -20,6 +21,8 @@ public class Commiuncate_Server {
 
     String get_question_url = "http://115.159.59.188:5000/get_question_by_industry_id?iid=";
     String post_answer_url = "http://115.159.59.188:5000/post_answer";
+    String post_login_url = "http://115.159.59.188:5000/login";
+    String post_register_url = "http://115.159.59.188:5000/register";
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
         OkHttpClient client = new OkHttpClient();
@@ -103,5 +106,43 @@ public class Commiuncate_Server {
         }
 
 
+    }
+
+    public String post_login(User user) throws Exception{
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("username",user.getUsername())
+                .add("password",user.getPassword())
+                .build();
+        Request request = new Request.Builder().url(post_login_url).post(requestBody).build();
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+            Log.i("登录",jsonString);
+            return jsonString;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "";
+        }
+    }
+
+    public String post_register(User user) throws Exception{
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("username",user.getUsername())
+                .add("password",user.getPassword())
+                .build();
+        Request request = new Request.Builder().url(post_register_url).post(requestBody).build();
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+            Log.i("注册",jsonString);
+            return jsonString;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "";
+        }
     }
 }

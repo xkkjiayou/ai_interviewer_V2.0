@@ -10,39 +10,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.findai.xkk.ai_interviewer.LoginActivity;
 import com.findai.xkk.ai_interviewer.R;
+import com.findai.xkk.ai_interviewer.Resume_Warehouse_Activity;
+import com.findai.xkk.ai_interviewer.Utils.ACache;
+import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.WelcomeIndexActivity;
+import com.findai.xkk.ai_interviewer.domain.User;
 
 @SuppressLint("ValidFragment")
-public class Myinfo_Index_maintop_Fragment extends Fragment{
-//
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.btn_kj_interview:
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("iid",1);
-//                Intent intent = new Intent(getContext(),WelcomeIndexActivity.class);
-//                intent.putExtra("iid",bundle);
-//                startActivity(intent);
-//        }
-//    }
+public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnClickListener{
 
-//    callbackQuestion_Choose_Fragment callbackQuestion_choose_fragment = null;
-//    private Button btn_kj;
-//    public Myinfo_Index_maintop_Fragment() {
-//    }
-//
-//    public Myinfo_Index_maintop_Fragment(callbackQuestion_Choose_Fragment callbackQuestionChooseFragment) {
-//        this.callbackQuestion_choose_fragment = callbackQuestionChooseFragment;
-//
-//    }
-
+    LinearLayout ll_myingo_setting;
+    TextView tv_username;
+    TextView tv_userinfo;
+    LinearLayout ll_user_panel ;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.myinfo_fragment, container, false);
+        User user = (User) ACache.get(getContext()).getAsObject(GlobalParams.Para_USER);
+        tv_userinfo = view.findViewById(R.id.tv_userinfo);
+        tv_username = view.findViewById(R.id.tv_nickname);
+        ll_myingo_setting = view.findViewById(R.id.ll_myingo_setting);
+        ll_myingo_setting.setOnClickListener(this);
+        if(user == null){
+            tv_username.setText("请登录");
+            tv_userinfo.setText("");
+            ll_user_panel = view.findViewById(R.id.ll_user_panel);
+            ll_user_panel.setOnClickListener(this);
+        }else {
+
+            tv_username.setText(user.getNickname());
+            tv_userinfo.setText(""+user.getDegree()+" | "+user.getUniversity()+" | "+user.getMajor()+"");
+
+        }
 //        RadioGroup radioGroup = view.findViewById(R.id.tv_question_radio);
 //        Bundle bundle = getArguments();
 //        Question q = (Question) bundle.getSerializable("question");
@@ -76,4 +81,20 @@ public class Myinfo_Index_maintop_Fragment extends Fragment{
 //        public int get_question_answer(int answer);
 //    }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.ll_user_panel:
+                intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_myingo_setting:
+                intent = new Intent(getContext(), Resume_Warehouse_Activity.class);
+                startActivity(intent);
+                break;
+
+
+        }
+    }
 }
