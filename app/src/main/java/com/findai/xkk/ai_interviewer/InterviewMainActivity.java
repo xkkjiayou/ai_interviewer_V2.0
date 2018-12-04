@@ -74,7 +74,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
             if (hasface) {
-//                System.out.println("人脸已存储");
+                System.out.println("人脸已存储");
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 try {
                     YuvImage image = new YuvImage(data, ImageFormat.NV21, size.width,
@@ -86,7 +86,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                         Bitmap bmp = BitmapFactory.decodeByteArray(
                                 stream.toByteArray(), 0, stream.size());
                         stream.close();
-
+                        bmp = adjustPhotoRotation(bmp,-90);
                         img_base64 = bitmapToBase64(bmp);
 //                        System.out.println(img_base64);
                     }
@@ -103,6 +103,22 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     private Iterator<Question> questionIterator;
     private TextView tv_has_face;
 
+    public Bitmap adjustPhotoRotation(Bitmap bm, final int orientationDegree)
+    {
+
+        Matrix m = new Matrix();
+        m.setRotate(orientationDegree, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
+
+        try {
+            Bitmap bm1 = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), m, true);
+
+            return bm1;
+
+        } catch (OutOfMemoryError ex) {
+        }
+        return null;
+
+    }
     /**
      * bitmap转为base64
      *
@@ -179,7 +195,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hasface = false;
+//        hasface = false;
         setContentView(R.layout.interview_main_activity);
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("index_get_questionlist_bundle");
@@ -272,6 +288,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                     break;
             }
         } else {
+            System.out.println(img_base64);
             questionList.setImgdata(img_base64);
             questionList.setUserid(userid);
             questionList.setReportid(UUID.randomUUID().toString().replace("-", "") + System.currentTimeMillis());
@@ -293,6 +310,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                             bundle.putString("report_url", report_result);
                             intent.putExtra("report_url", bundle);
                             startActivity(intent);
+                            finish();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

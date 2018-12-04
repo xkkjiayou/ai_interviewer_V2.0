@@ -63,7 +63,7 @@ public class SubmitReportActivity extends AppCompatActivity {
                 bundle.putString("report_url", report_url);
                 intent.putExtra("report_url", bundle);
                 startActivity(intent);
-//                finish();
+                finish();
             }
         };
         time.schedule(tk, 2000);
