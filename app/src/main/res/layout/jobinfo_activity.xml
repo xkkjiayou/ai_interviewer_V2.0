@@ -209,7 +209,7 @@
             android:id="@+id/rd_myinfo"
             android:layout_width="0dp"
             android:paddingTop="20dp"
-            android:paddingBottom="25dp"
+            android:paddingBottom="22dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#6699cc"
