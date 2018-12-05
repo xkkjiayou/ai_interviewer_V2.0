@@ -34,12 +34,14 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
                 intent = new Intent(getContext(),WelcomeIndexActivity.class);
                 intent.putExtra("iid",bundle);
                 startActivity(intent);
+                break;
             case R.id.ll_job:
                 bundle = new Bundle();
                 bundle.putInt("jid",1);
                 intent = new Intent(getContext(),JobinfoActivity.class);
                 intent.putExtra("jid",bundle);
                 startActivity(intent);
+                break;
         }
     }
 
