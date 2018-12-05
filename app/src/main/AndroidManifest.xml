@@ -24,6 +24,7 @@
         <activity android:name=".ViewReportWeb"></activity>
         <activity android:name=".InterviewMainActivity"></activity>
         <activity android:name=".Resume_Warehouse_Activity"></activity>
+        <activity android:name=".JobinfoActivity"></activity>
         <activity android:name=".WriteResumeActivity"></activity>
     </application>
 

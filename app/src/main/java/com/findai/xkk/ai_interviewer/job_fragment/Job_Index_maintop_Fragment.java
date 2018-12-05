@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.findai.xkk.ai_interviewer.JobinfoActivity;
 import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.WelcomeIndexActivity;
 import com.findai.xkk.ai_interviewer.domain.Question;
@@ -23,18 +25,27 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        Bundle bundle;
+        Intent intent;
         switch (v.getId()){
             case R.id.btn_kj_interview:
-                Bundle bundle = new Bundle();
+                bundle = new Bundle();
                 bundle.putInt("iid",1);
-                Intent intent = new Intent(getContext(),WelcomeIndexActivity.class);
+                intent = new Intent(getContext(),WelcomeIndexActivity.class);
                 intent.putExtra("iid",bundle);
+                startActivity(intent);
+            case R.id.ll_job:
+                bundle = new Bundle();
+                bundle.putInt("jid",1);
+                intent = new Intent(getContext(),JobinfoActivity.class);
+                intent.putExtra("jid",bundle);
                 startActivity(intent);
         }
     }
 
     callbackQuestion_Choose_Fragment callbackQuestion_choose_fragment = null;
     private Button btn_kj;
+    private LinearLayout ll_job;
     public Job_Index_maintop_Fragment() {
     }
 
@@ -72,6 +83,8 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
 //        });
         btn_kj = view.findViewById(R.id.btn_kj_interview);
         btn_kj.setOnClickListener(this);
+        ll_job = view.findViewById(R.id.ll_job);
+        ll_job.setOnClickListener(this);
         return view;
 
     }
