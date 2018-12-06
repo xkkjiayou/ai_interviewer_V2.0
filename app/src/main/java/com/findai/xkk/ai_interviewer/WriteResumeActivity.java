@@ -30,6 +30,7 @@ import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Myevaluate_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Workexperience_Fragment;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -96,7 +97,18 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
         });
         thread.start();
         while(resume==null){
-//            System.out.println("等待简历加载");
+            System.out.println("等待简历加载");
+        }
+
+        if(resume.getEduexperience().size()==0){
+            List<EducationExperience> l = new ArrayList<>();
+            l.add(new EducationExperience());
+            resume.setEduexperience(l);
+        }
+        if(resume.getWorkexperience().size()==0){
+            List<WorkExperience> l = new ArrayList<>();
+            l.add(new WorkExperience());
+            resume.setWorkexperience(l);
         }
         resume.setUid(user.getUid());
 //            Toast.makeText().show();
@@ -106,11 +118,11 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
         System.out.println("==============");
         bundle = new Bundle();
         bundle.putSerializable("resume", resume);
-        resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
+        ft = fm.beginTransaction();
+//        resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
 //        resume_myevaluate_fragment = new Resume_Myevaluate_Fragment();
 //        resume_workexperience_fragment = new Resume_Workexperience_Fragment();
 //        resume_education_fragment = new Resume_Education_Fragment();
-        ft = fm.beginTransaction();
         resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
         Current_Fragment = resume_basicinfo_fragment;
         ((Resume_Basicinfo_Fragment) Current_Fragment).setArguments(bundle);
@@ -123,8 +135,6 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         ft = fm.beginTransaction();
-
-
         switch (checkedId){
             case R.id.rd_resume_basicinfo:
                 ft.hide((Fragment) Current_Fragment);
