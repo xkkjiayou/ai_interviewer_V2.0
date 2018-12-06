@@ -6,14 +6,14 @@ import java.util.List;
 public class QuestionList implements Serializable {
     List<Question> questionList;
     String imgdata;
-    String userid;
+    int userid;
     String reportid;
 
-    public String getUserid() {
+    public int getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 

@@ -37,8 +37,11 @@ import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
+import com.findai.xkk.ai_interviewer.Utils.ACache;
+import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.Question;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
+import com.findai.xkk.ai_interviewer.domain.User;
 import com.findai.xkk.ai_interviewer.question_fragment.question_choose_fragment;
 import com.findai.xkk.ai_interviewer.question_fragment.question_wenda_fragment;
 import com.google.gson.Gson;
@@ -54,8 +57,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     static {
         System.loadLibrary("native-lib");
     }
-
-    String userid = "602409866";
+    int uid=0;
     String img_base64 = "";
     QuestionList questionList = null;
     private Camera camera;
@@ -191,12 +193,14 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
 //        System.out.println("ACT_wenda:"+answer);
         return answer;
     }
-
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        hasface = false;
         setContentView(R.layout.interview_main_activity);
+        user = (User) ACache.get(this).getAsObject(GlobalParams.Para_USER);
+        uid = user.getUid();
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("index_get_questionlist_bundle");
         questionList = (QuestionList) bundle.getSerializable("questionlist");
@@ -290,7 +294,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         } else {
             System.out.println(img_base64);
             questionList.setImgdata(img_base64);
-            questionList.setUserid(userid);
+            questionList.setUserid(uid);
             questionList.setReportid(UUID.randomUUID().toString().replace("-", "") + System.currentTimeMillis());
             Gson gson = new Gson();
             final String answer_json = gson.toJson(questionList);

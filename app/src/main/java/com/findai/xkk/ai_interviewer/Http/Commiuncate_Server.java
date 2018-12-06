@@ -3,6 +3,8 @@ package com.findai.xkk.ai_interviewer.Http;
 import android.util.Log;
 
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
+import com.findai.xkk.ai_interviewer.domain.Resume;
+import com.findai.xkk.ai_interviewer.domain.ResumeWrapper;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
 
@@ -24,6 +26,8 @@ public class Commiuncate_Server {
     String post_answer_url = "http://115.159.59.188:5000/post_answer";
     String post_login_url = "http://115.159.59.188:5000/login";
     String post_register_url = "http://115.159.59.188:5000/register";
+    String post_resume_url = "http://115.159.59.188:5000/add_resume";
+    String get_resume_by_uid_url = "http://115.159.59.188:5000/get_resume_by_uid?uid=";
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
         OkHttpClient client = new OkHttpClient();
@@ -145,6 +149,55 @@ public class Commiuncate_Server {
         }catch (Exception ex){
             ex.printStackTrace();
             return "";
+        }
+    }
+
+
+    public String post_resume(Resume resume) throws Exception{
+        OkHttpClient client = new OkHttpClient();
+        System.out.println("上传的简历："+gson.toJson(resume));
+        RequestBody requestBody = new FormBody.Builder()
+                .add("resume",gson.toJson(resume))
+//                .add("password",user.getPassword())
+                .build();
+        Request request = new Request.Builder().url(post_resume_url).post(requestBody).build();
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+            Log.i("注册",jsonString);
+            return jsonString;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "";
+        }
+    }
+
+
+    public Resume get_resume_by_uid(User user) throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String qurl = get_resume_by_uid_url + user.getUid();
+        System.out.println(qurl);
+        Resume resume = new Resume();
+        Request request = new Request.Builder().url(qurl).build();
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            String str = response.body().string();
+            System.out.println(str);
+            ResumeWrapper rw  = gson.fromJson(str,ResumeWrapper.class);
+            if(rw.getStatus().equals("success")){
+                resume = rw.getResume();
+            }else
+            {
+                resume = new Resume();
+            }
+            return resume;
+        } else {
+
+//            throw new IOException("Unexpected code " + response);
+            return new Resume();
+
         }
     }
 }

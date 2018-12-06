@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="姓名："/>
                 <EditText
+                    android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -53,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:text="生日："/>
                 <EditText
+                    android:id="@+id/et_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -70,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:text="籍贯："/>
                 <EditText
+                    android:id="@+id/et_nativeplace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -87,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="性别："/>
                 <EditText
+                    android:id="@+id/et_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -103,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:text="电话："/>
                 <EditText
+                    android:id="@+id/et_tele"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -119,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text="邮箱："/>
                 <EditText
+                    android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -136,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:text="理想："/>
                 <EditText
+                    android:id="@+id/et_ideal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/write_resume_et_selector"
@@ -145,13 +152,14 @@
 
             </LinearLayout>
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="30dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/login_btn_selector"
-                    android:textColor="#ffffff"
-                    android:text="下一步"/>
+                <!--<Button-->
+                    <!--android:id="@+id/btn_next_resume"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/login_btn_selector"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:text="下一步"/>-->
             </LinearLayout>
     </ScrollView>
 </LinearLayout>
