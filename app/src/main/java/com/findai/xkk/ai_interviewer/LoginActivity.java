@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     bundle.putSerializable("user", login_user);
                                     intent.putExtra("user", bundle);
                                     startActivity(intent);
+                                    finish();
                                 }
                                 Looper.loop();
 //                            Looper.loop();

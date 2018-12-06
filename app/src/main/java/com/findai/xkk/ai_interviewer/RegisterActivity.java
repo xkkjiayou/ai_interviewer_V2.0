@@ -87,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 Toast.makeText(getBaseContext(),"注册成功，请登录",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getBaseContext(),LoginActivity.class);
                                 startActivity(intent);
+                                finish();
                             }else {
                                 Toast.makeText(getBaseContext(),"账号已存在",Toast.LENGTH_SHORT).show();
                             }
