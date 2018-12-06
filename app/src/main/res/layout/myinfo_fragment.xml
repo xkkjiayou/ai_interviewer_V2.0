@@ -171,7 +171,44 @@
         </LinearLayout>
         <!--设置banner end-->
 
-
+        <!--退出登录banner-->
+        <LinearLayout
+            android:id="@+id/ll_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="0.5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="20dp"
+            android:weightSum="12"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="10">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/myinfo_setting"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#333333"
+                    android:text="注销"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--退出登录banner end-->
 
     </LinearLayout>
 </LinearLayout>

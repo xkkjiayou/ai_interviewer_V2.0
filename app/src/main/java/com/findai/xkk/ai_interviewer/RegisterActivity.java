@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -22,9 +23,13 @@ import com.google.gson.Gson;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     EditText et_username;
     EditText et_password;
+    EditText et_tele;
+    EditText et_nickname;
     Button btn_register;
     String username;
     String password;
+    String tele;
+    String nickname;
     Commiuncate_Server cs = new Commiuncate_Server();
 
     @Override
@@ -46,6 +51,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         actionBar.hide();
         et_password = findViewById(R.id.et_password);
         et_username= findViewById(R.id.et_username);
+        et_tele = findViewById(R.id.et_tele);
+        et_nickname= findViewById(R.id.et_nickname);
         btn_register = findViewById(R.id.btn_register);
 
 
@@ -56,30 +63,58 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         username = et_username.getText().toString().trim();
         password = et_password.getText().toString().trim();
-        if(username==null||username .equals("")||password==null||password.equals("")){
-            Toast.makeText(this,"请输入账号密码哦",Toast.LENGTH_LONG).show();
+        nickname = et_nickname.getText().toString().trim();
+        tele = et_tele.getText().toString().trim();
+        if(username==null||username .equals("")||password==null||password.equals("")||nickname==null||nickname.equals("")||tele==null||tele.equals("")){
+            Toast.makeText(this,"请输入全部信息哦",Toast.LENGTH_LONG).show();
             return;
         }
         else {
-            User user = new User();
+            final User user = new User();
             user.setPassword(password);
             user.setUsername(username);
+            user.setNickname(nickname);
+            user.setTele(tele);
             try {
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String json = cs.post_register(user);
 
-                String json = cs.post_register(user);
-                Gson gson = new Gson();
-                User login_user = gson.fromJson(json,User.class);
-                if(login_user==null){
-                    Toast.makeText(this,"账号已存在",Toast.LENGTH_LONG).show();
-                    return;
-                }else{
-                    ACache.get(this).put(GlobalParams.Para_USER,login_user);
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("user",login_user);
-                    intent.putExtra("user",bundle);
-                    startActivity(intent);
-                }
+                            Looper.prepare();
+                            if(json.equals("success")){
+                                Toast.makeText(getBaseContext(),"注册成功，请登录",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(getBaseContext(),"账号已存在",Toast.LENGTH_SHORT).show();
+                            }
+                            System.out.println(json);
+                            Looper.loop();
+                            return;
+                        }catch (Exception ec){
+                            ec.printStackTrace();
+                        }
+//                        Toast.makeText(this,json,Toast.LENGTH_LONG).show();
+                    }
+                });
+                thread.start();
+//                String json = cs.post_register(user);
+//                Toast.makeText(this,json,Toast.LENGTH_LONG).show();
+//                Gson gson = new Gson();
+//                User login_user = gson.fromJson(json,User.class);
+//                if(login_user==null){
+//                    Toast.makeText(this,json,Toast.LENGTH_LONG).show();
+//                    return;
+//                }else{
+//                    ACache.get(this).put(GlobalParams.Para_USER,login_user);
+//                    Intent intent = new Intent();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("user",login_user);
+//                    intent.putExtra("user",bundle);
+//                    startActivity(intent);
+//                }
 
 
             }catch (Exception ex){

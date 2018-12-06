@@ -62,5 +62,12 @@
             android:background="@drawable/write_resume_et_selector"
             style="@style/write_resume_et_css"
             />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_btn_selector"
+            android:textColor="#ffffff"
+            android:text="下一步"/>
     </LinearLayout>
 </LinearLayout>

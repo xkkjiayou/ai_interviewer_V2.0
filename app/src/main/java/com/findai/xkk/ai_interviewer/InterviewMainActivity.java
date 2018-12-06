@@ -293,7 +293,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
             questionList.setUserid(userid);
             questionList.setReportid(UUID.randomUUID().toString().replace("-", "") + System.currentTimeMillis());
             Gson gson = new Gson();
-            final String json = gson.toJson(questionList);
+            final String answer_json = gson.toJson(questionList);
 //            System.out.println(json);
             final Commiuncate_Server cs = new Commiuncate_Server();
             try {
@@ -303,7 +303,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                     public void run() {
                         try {
 //                            String report_result="";
-                            String report_result = cs.post_answer(json);
+                            String report_result = cs.post_answer(answer_json);
                             System.out.println("ACt:" + report_result);
                             Intent intent = new Intent(getBaseContext(), SubmitReportActivity.class);
                             Bundle bundle = new Bundle();

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <FrameLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_gravity="center_vertical|center_horizontal">
@@ -48,7 +48,7 @@
                         android:paddingTop="20dp"
                         android:text="人脸比对工作尚未完成\n（入镜一次即可）"
                         android:textColor="#ffffff"/>
-                </FrameLayout>
+                </RelativeLayout>
             </LinearLayout>
             <!--问题区域 开始-->
             <FrameLayout

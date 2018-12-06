@@ -25,6 +25,7 @@ import com.findai.xkk.ai_interviewer.domain.User;
 public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnClickListener{
 
     LinearLayout ll_myingo_setting;
+    LinearLayout ll_logout;
     TextView tv_username;
     TextView tv_userinfo;
     LinearLayout ll_user_panel ;
@@ -37,6 +38,8 @@ public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnCl
         tv_username = view.findViewById(R.id.tv_nickname);
         ll_myingo_setting = view.findViewById(R.id.ll_myingo_setting);
         ll_myingo_setting.setOnClickListener(this);
+        ll_logout = view.findViewById(R.id.ll_logout);
+        ll_logout.setOnClickListener(this);
         if(user == null){
             tv_username.setText("请登录");
             tv_userinfo.setText("");
@@ -45,7 +48,7 @@ public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnCl
         }else {
 
             tv_username.setText(user.getNickname());
-            tv_userinfo.setText(""+user.getDegree()+" | "+user.getUniversity()+" | "+user.getMajor()+"");
+            tv_userinfo.setText("");
 
         }
 //        RadioGroup radioGroup = view.findViewById(R.id.tv_question_radio);
@@ -92,6 +95,12 @@ public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnCl
             case R.id.ll_myingo_setting:
                 intent = new Intent(getContext(), Resume_Warehouse_Activity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_logout:
+                ACache.get(getContext()).remove(GlobalParams.Para_USER);
+                intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
                 break;
 
 

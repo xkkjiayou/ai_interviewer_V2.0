@@ -5,18 +5,31 @@ import java.io.Serializable;
 public class User implements Serializable{
     String username;
     String password;
-
     String nickname;
-    String university;
-    String degree;
-    String major;
-    String imgurl;
+    String tele;
+    String token;
+    String deviceid;
+    int uid;
+    String status;
 
+    public String getStatus() {
+        return status;
+    }
 
-    int userid;
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void setUsername(String username) {
@@ -31,14 +44,6 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
-
     public String getNickname() {
         return nickname;
     }
@@ -47,35 +52,27 @@ public class User implements Serializable{
         this.nickname = nickname;
     }
 
-    public String getUniversity() {
-        return university;
+    public String getTele() {
+        return tele;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
+    public void setTele(String tele) {
+        this.tele = tele;
     }
 
-    public String getDegree() {
-        return degree;
+    public int getUid() {
+        return uid;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public String getMajor() {
-        return major;
+    public String getDeviceid() {
+        return deviceid;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public String getImgurl() {
-        return imgurl;
-    }
-
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setDeviceid(String deviceid) {
+        this.deviceid = deviceid;
     }
 }

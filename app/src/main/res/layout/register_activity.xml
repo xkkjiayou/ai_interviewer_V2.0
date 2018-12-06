@@ -38,6 +38,28 @@
             android:layout_weight="12"
 
             android:hint="请输入您的密码" />
+        <EditText
+            android:id="@+id/et_nickname"
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="#506699cc"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+
+            android:hint="请输入您的昵称" />
+        <EditText
+            android:id="@+id/et_tele"
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="#506699cc"
+            android:layout_height="wrap_content"
+            android:layout_weight="12"
+
+            android:hint="请输入您的电话" />
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"

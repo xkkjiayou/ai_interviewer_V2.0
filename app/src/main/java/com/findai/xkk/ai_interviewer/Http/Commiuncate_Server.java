@@ -19,6 +19,7 @@ import okhttp3.Response;
 
 public class Commiuncate_Server {
 
+    Gson gson = new Gson();
     String get_question_url = "http://115.159.59.188:5000/get_question_by_industry_id?iid=";
     String post_answer_url = "http://115.159.59.188:5000/post_answer";
     String post_login_url = "http://115.159.59.188:5000/login";
@@ -109,10 +110,11 @@ public class Commiuncate_Server {
     }
 
     public String post_login(User user) throws Exception{
+
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("username",user.getUsername())
-                .add("password",user.getPassword())
+                .add("user",gson.toJson(user))
+//                .add("password",user.getPassword())
                 .build();
         Request request = new Request.Builder().url(post_login_url).post(requestBody).build();
         Response response;
@@ -130,8 +132,8 @@ public class Commiuncate_Server {
     public String post_register(User user) throws Exception{
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("username",user.getUsername())
-                .add("password",user.getPassword())
+                .add("user",gson.toJson(user))
+//                .add("password",user.getPassword())
                 .build();
         Request request = new Request.Builder().url(post_register_url).post(requestBody).build();
         Response response;
