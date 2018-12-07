@@ -18,6 +18,7 @@ import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.job_fragment.Job_Index_maintop_Fragment;
 import com.findai.xkk.ai_interviewer.job_fragment.Myinfo_Index_maintop_Fragment;
 import com.findai.xkk.ai_interviewer.job_fragment.Toudi_Index_maintop_Fragment;
+import com.oragee.banners.BannerView;
 
 public class JobCenterActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
     @Override
@@ -48,13 +49,13 @@ public class JobCenterActivity extends AppCompatActivity implements RadioGroup.O
     private Toudi_Index_maintop_Fragment toudi_index_maintop_fragment;
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
-    Button btn_kj ;
+
+    BannerView bannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.job_center_activity);
-
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN

@@ -6,15 +6,15 @@ import java.util.List;
 public class QuestionList implements Serializable {
     List<Question> questionList;
     String imgdata;
-    int userid;
+    int uid;
     String reportid;
 
     public int getUserid() {
-        return userid;
+        return uid;
     }
 
     public void setUserid(int userid) {
-        this.userid = userid;
+        this.uid = userid;
     }
 
     public String getReportid() {

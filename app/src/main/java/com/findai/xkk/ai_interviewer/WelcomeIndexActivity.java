@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
+import com.findai.xkk.ai_interviewer.Utils.ACache;
+import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
+import com.findai.xkk.ai_interviewer.domain.User;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,7 +29,14 @@ public class WelcomeIndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.welcome_waiting_index);
-
+        User user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
+        if(user == null){
+            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN

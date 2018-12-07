@@ -199,8 +199,18 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
 //        hasface = false;
         setContentView(R.layout.interview_main_activity);
-        user = (User) ACache.get(this).getAsObject(GlobalParams.Para_USER);
+//        user = (User) ACache.get(this).getAsObject(GlobalParams.Para_USER);
+
+        user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
+        if(user == null){
+            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         uid = user.getUid();
+
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("index_get_questionlist_bundle");
         questionList = (QuestionList) bundle.getSerializable("questionlist");
