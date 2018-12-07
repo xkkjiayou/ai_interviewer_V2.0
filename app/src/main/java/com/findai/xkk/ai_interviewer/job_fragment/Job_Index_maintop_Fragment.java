@@ -61,7 +61,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         this.callbackQuestion_choose_fragment = callbackQuestionChooseFragment;
 
     }
-    private int[] imgs = {R.mipmap.ad1,R.mipmap.ad3,R.mipmap.ad4,R.mipmap.ad6,R.mipmap.ad7,R.mipmap.ad8};
+    private int[] imgs = {R.mipmap.ad4,R.mipmap.ad3,R.mipmap.ad6,R.mipmap.ad7,R.mipmap.ad8,R.mipmap.ad1};
     private List<View> viewList;
 
     @Nullable
@@ -81,7 +81,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         }
         bannerView = (BannerView) view.findViewById(R.id.banner_ad);
         bannerView.startLoop(true);
-
+        bannerView.setLoopInterval(3000);
         bannerView.setViewList(viewList);
 //        RadioGroup radioGroup = view.findViewById(R.id.tv_question_radio);
 //        Bundle bundle = getArguments();

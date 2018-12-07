@@ -25,6 +25,16 @@ public class Resume_Warehouse_Activity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo_resume_warehouse_activity);
+
+        User user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
+        if(user == null){
+            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         ll_myresume = findViewById(R.id.ll_myresume);
         ll_myresume.setOnClickListener(this);
         System.out.println("232323232__3232");
