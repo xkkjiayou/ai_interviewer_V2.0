@@ -1,7 +1,13 @@
 package com.findai.xkk.ai_interviewer.Http;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.findai.xkk.ai_interviewer.Utils.BitmapUtil;
+import com.findai.xkk.ai_interviewer.domain.Job;
+import com.findai.xkk.ai_interviewer.domain.JobList;
+import com.findai.xkk.ai_interviewer.domain.JobWrapper;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.ResumeWrapper;
@@ -10,7 +16,11 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
@@ -28,6 +38,8 @@ public class Commiuncate_Server {
     String post_register_url = "http://115.159.59.188:5000/register";
     String post_resume_url = "http://115.159.59.188:5000/add_resume";
     String get_resume_by_uid_url = "http://115.159.59.188:5000/get_resume_by_uid?uid=";
+    String get_jobdetails_by_jid_url = "http://115.159.59.188:5000/get_jobdetails?jobid=";
+    String get_lastest_joblist_url= "http://115.159.59.188:5000/get_joblist?topk=";
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
         OkHttpClient client = new OkHttpClient();
@@ -184,7 +196,7 @@ public class Commiuncate_Server {
         Response response = client.newCall(request).execute();
         if (response.isSuccessful()) {
             String str = response.body().string();
-            System.out.println(str);
+//            System.out.println(str);
             ResumeWrapper rw  = gson.fromJson(str,ResumeWrapper.class);
             if(rw.getStatus().equals("success")){
                 resume = rw.getResume();
@@ -199,5 +211,57 @@ public class Commiuncate_Server {
             return new Resume();
 
         }
+    }
+
+
+
+    public JobList get_joblist(int topk) throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String qurl = get_lastest_joblist_url + topk;
+        System.out.println(qurl);
+        List<Job> joblist = new ArrayList<>();
+        Request request = new Request.Builder().url(qurl).build();
+        Response response = client.newCall(request).execute();
+
+        if (response.isSuccessful()) {
+            String str = response.body().string();
+//            System.out.println(str);
+            JobList rw  = gson.fromJson(str,JobList.class);
+            if(rw.getStatus().equals("success")){
+                for (Job j : rw.getJobList()){
+                    Request imgrequest = new Request.Builder()
+                            .url(j.getCompanyLogo())
+                            .build();
+                    Response img_response = client.newCall(imgrequest).execute();
+                    InputStream inputStream = img_response.body().byteStream();//得到图片的流
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    j.setBitmap(BitmapUtil.Bitmap2Bytes(bitmap));
+                }
+            }
+
+            return rw;
+        }
+        return new JobList();
+    }
+
+    public Job get_joblist(Job job) throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String qurl = get_jobdetails_by_jid_url + job.getId_job();
+        System.out.println(qurl);
+        JobWrapper jobWrapper = new JobWrapper();
+        Request request = new Request.Builder().url(qurl).build();
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            String str = response.body().string();
+            System.out.println(str);
+            JobWrapper rw  = gson.fromJson(str,JobWrapper.class);
+            if(rw.getStatus().equals("success")){
+                job = rw.getJob_details();
+            }
+        }
+
+        return job;
     }
 }

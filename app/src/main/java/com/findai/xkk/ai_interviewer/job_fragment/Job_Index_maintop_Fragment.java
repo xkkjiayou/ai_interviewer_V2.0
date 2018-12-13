@@ -9,24 +9,44 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.JobinfoActivity;
 import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.WelcomeIndexActivity;
+import com.findai.xkk.ai_interviewer.domain.Job;
+import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.Question;
 import com.oragee.banners.BannerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressLint("ValidFragment")
-public class Job_Index_maintop_Fragment extends Fragment implements View.OnClickListener{
+public class Job_Index_maintop_Fragment extends Fragment implements View.OnClickListener,ListView.OnItemClickListener{
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final int p = position;
+        Bundle bundle = new Bundle();
+        joblist.get(position).setBitmap(null);
+        bundle.putSerializable("job",joblist.get(position));
+
+        Intent intent = new Intent(getContext(),JobinfoActivity.class);
+        intent.putExtra("job",bundle);
+        startActivity(intent);
+
+    }
 
     BannerView bannerView;
     @Override
@@ -41,19 +61,23 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
                 intent.putExtra("iid",bundle);
                 startActivity(intent);
                 break;
-            case R.id.ll_job:
-                bundle = new Bundle();
-                bundle.putInt("jid",1);
-                intent = new Intent(getContext(),JobinfoActivity.class);
-                intent.putExtra("jid",bundle);
-                startActivity(intent);
-                break;
+//            case R.id.ll_job:
+//                bundle = new Bundle();
+//                bundle.putInt("jid",1);
+//                intent = new Intent(getContext(),JobinfoActivity.class);
+//                intent.putExtra("jid",bundle);
+//                startActivity(intent);
+//                break;
         }
     }
 
     callbackQuestion_Choose_Fragment callbackQuestion_choose_fragment = null;
     private Button btn_kj;
+    private  List<Job> joblist = new ArrayList<>();
+    final Commiuncate_Server cs = new Commiuncate_Server();
     private LinearLayout ll_job;
+    private ListView lv;
+    private List<Map<String, Object>> data;
     public Job_Index_maintop_Fragment() {
     }
 
@@ -68,9 +92,60 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.job_center_maintop_activity, container, false);
-
+        lv = view.findViewById(R.id.lv_joblist);
+        Bundle bundle = getArguments();
+        joblist = ((JobList)bundle.getSerializable("joblist")).getJobList();
+        data = getData();
+        lv.setAdapter(new JobListView_Adapter(getContext(), data));
+        fixListViewHeight(lv);
+//                                fixListViewHeight(lv);
+//
+//        Thread thread1 = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try{
+//                    joblist = cs.get_joblist(10);
+//                    data = getData();
+////                    System.out.println(joblist.size()+"OK!!!!!!!!");
+//                    job_loaded_flag = true;
+//                }catch (Exception ex){
+//                    ex.printStackTrace();
+//                }
+//            }
+//        });
+//        thread1.start();
+//        Thread thread = new Thread(new Runnable() {
+//            boolean thread_flag=false;
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    if(thread_flag){
+//                        return;
+//                    }
+////                    System.out.println("又来了");
+//                    getActivity().runOnUiThread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            if(job_loaded_flag) {
+////                            System.out.println("====3213=21=321=321=3=21=321=321=321=3=21=321");
+//                                lv.setAdapter(new JobListView_Adapter(getContext(), data));
+//                                fixListViewHeight(lv);
+//                                job_loaded_flag = false;
+//                                thread_flag = true;
+//                                return;
+//                            }
+//                        }
+//
+//                    });
+//                }
+//            }
+//        });
+//        thread.start();
+//        System.out.println(data.size()+"----------------===");
 
         viewList = new ArrayList<View>();
+        lv.setOnItemClickListener(this);
         for (int i = 0; i < imgs.length; i++) {
             ImageView image = new ImageView(getContext());
             image.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -83,39 +158,78 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         bannerView.startLoop(true);
         bannerView.setLoopInterval(3000);
         bannerView.setViewList(viewList);
-//        RadioGroup radioGroup = view.findViewById(R.id.tv_question_radio);
-//        Bundle bundle = getArguments();
-//        Question q = (Question) bundle.getSerializable("question");
-//        TextView qtitle = (TextView) view.findViewById(R.id.tv_question_title);
-//        qtitle.setText(q.getTitle());
-//        int i = 0;
-//        for (String qchoose_item : q.getQuestion_choose_items()) {
-//            RadioButton rb = new RadioButton(getContext());
-//            rb.setId(i);
-////            rb.setb
-//            rb.setText(qchoose_item);
-//            i++;
-//            radioGroup.addView(rb);
-//        }
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-////                System.out.println("------------------");
-////                String answer = ((RadioButton)group.getChildAt(checkedId)).getText().toString();
-////                System.out.println(answer);
-//                callbackQuestion_choose_fragment.get_question_answer(checkedId);
-//            }
-//        });
+
         btn_kj = view.findViewById(R.id.btn_kj_interview);
         btn_kj.setOnClickListener(this);
-        ll_job = view.findViewById(R.id.ll_job);
-        ll_job.setOnClickListener(this);
+//        ll_job = view.findViewById(R.id.ll_job);
+//        ll_job.setOnClickListener(this);
+
+
+
         return view;
 
     }
+    boolean job_loaded_flag = false;
+    public List<Map<String, Object>> getData(){
 
+        List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
+        for (Job job : joblist) {
+            Map<String, Object> map=new HashMap<String, Object>();
+            map.put("image", job.getBitmap());
+            map.put("jobname", job.getJobName());
+            map.put("jobdesc", job.getDegree()+"|"+job.getWorkPlace());
+            list.add(map);
+        }
+        System.out.println(list.size());
+        return list;
+    }
     public interface callbackQuestion_Choose_Fragment {
         public int get_question_answer(int answer);
     }
+
+
+    public void fixListViewHeight(ListView listView) {
+
+        // 如果没有设置数据适配器，则ListView没有子项，返回。
+
+        JobListView_Adapter listAdapter = (JobListView_Adapter) listView.getAdapter();
+
+        int totalHeight = 0;
+
+        if (listAdapter == null) {
+
+            return;
+
+        }
+
+        for (int index = 0, len = listAdapter.getCount(); index < len; index++) {
+
+            View listViewItem = listAdapter.getView(index , null, listView);
+
+            // 计算子项View 的宽高
+
+            listViewItem.measure(0, 0);
+
+            // 计算所有子项的高度和
+
+            totalHeight += listViewItem.getMeasuredHeight();
+
+        }
+
+
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        // listView.getDividerHeight()获取子项间分隔符的高度
+
+        // params.height设置ListView完全显示需要的高度
+
+        params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+
+        listView.setLayoutParams(params);
+
+    }
+
+
 
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--一个工作banner-->
+    <LinearLayout
+        android:id="@+id/ll_job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="12"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="8">
+            <ImageView
+                android:id="@+id/img_job_img"
+                android:layout_marginTop="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/jobimg_shape"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/company_icon1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="4"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_jobname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#888888"
+                android:text="自媒体商务（实习生）"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/tv_jbdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#888888"
+                android:layout_marginTop="5dp"
+                android:textSize="12dp"
+                android:text="本科 | 福建福州| 截止时间：02-03"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--一个工作banner end-->
+
+</LinearLayout>

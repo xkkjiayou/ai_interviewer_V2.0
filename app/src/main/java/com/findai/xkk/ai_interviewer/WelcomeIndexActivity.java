@@ -10,33 +10,43 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
+import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
+import com.findai.xkk.ai_interviewer.domain.Job;
+import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.domain.User;
+import com.findai.xkk.ai_interviewer.job_fragment.JobListView_Adapter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WelcomeIndexActivity extends AppCompatActivity {
 
-    private Question_Data_Exe question_data_exe;
-    private QuestionList questionList = null;
-    int iid;
+    //    private Question_Data_Exe question_data_exe;
+//    private QuestionList questionList = null;
+//    int iid;
+    private JobList joblist = new JobList();
+
+    final Commiuncate_Server cs = new Commiuncate_Server();
+    boolean job_loaded_flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.welcome_waiting_index);
-        User user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
-        if(user == null){
-            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+        setContentView(R.layout.loading_activity);
+//        User user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
+//        if(user == null){
+//            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -46,58 +56,56 @@ public class WelcomeIndexActivity extends AppCompatActivity {
         }
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        iid = 1;
-        System.out.println("用户点击题库iid"+iid);
-        Thread thread = new Thread(new Runnable() {
+
+        Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                question_data_exe = new Question_Data_Exe(getBaseContext());
                 try {
-                    questionList = question_data_exe.Add_Question_To_DB(iid);
-
+                    joblist = cs.get_joblist(10);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("joblist", joblist);
+                    Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
+                    intent.putExtra("joblist", bundle);
+                    startActivity(intent);
+//                    data = getData();
+//                    System.out.println(joblist.size()+"OK!!!!!!!!");
+                    job_loaded_flag = true;
+                    finish();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
-        thread.start();
-//        while(questionList == null)
-//        {
+        thread1.start();
+//        Thread thread = new Thread(new Runnable() {
+//            boolean thread_flag=false;
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    if(thread_flag){
+//                        return;
+//                    }
+////                    System.out.println("又来了");
+//                    getActivity().runOnUiThread(new Runnable() {
 //
-//        }
-//        try {
+//                        @Override
+//                        public void run() {
+//                            if(job_loaded_flag) {
+////                            System.out.println("====3213=21=321=321=3=21=321=321=321=3=21=321");
+//                                lv.setAdapter(new JobListView_Adapter(getContext(), data));
+//                                fixListViewHeight(lv);
+//                                job_loaded_flag = false;
+//                                thread_flag = true;
+//                                return;
+//                            }
+//                        }
 //
-//            Thread.sleep(20000);
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-        enterHome();
+//                    });
+//                }
+//            }
+//        });
+//        thread.start();
 
-    }
-
-    private void enterHome() {
-        Timer time = new Timer();
-        TimerTask tk = new TimerTask() {
-            Intent intent = new Intent(getBaseContext(), ViewReportWeb.class);
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-
-                while (questionList!=null){
-                    Intent intent = new Intent(getBaseContext(), InterviewMainActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("questionlist", questionList);
-                    intent.putExtra("index_get_questionlist_bundle", bundle);
-                    startActivity(intent);
-                    finish();
-                    return;
-                }
-
-//                finish();
-            }
-        };
-        time.schedule(tk, 2000);
 
     }
 }
