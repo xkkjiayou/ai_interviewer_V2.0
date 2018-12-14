@@ -1,12 +1,15 @@
 package com.findai.xkk.ai_interviewer;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
@@ -32,6 +35,7 @@ public class WelcomeIndexActivity extends AppCompatActivity {
     private JobList joblist = new JobList();
 
     final Commiuncate_Server cs = new Commiuncate_Server();
+    RelativeLayout rl_index_loading;
     boolean job_loaded_flag = false;
 
     @Override
@@ -47,6 +51,7 @@ public class WelcomeIndexActivity extends AppCompatActivity {
 //            finish();
 //            return;
 //        }
+        rl_index_loading = findViewById(R.id.rl_index_loading);
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -61,7 +66,15 @@ public class WelcomeIndexActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    joblist = cs.get_joblist(10);
+                    final Bitmap bitmap = cs.get_index_load_bitmap_url();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            rl_index_loading.setBackground(new BitmapDrawable(bitmap));
+                        }
+                    });
+                    joblist = cs.get_joblist(20);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("joblist", joblist);
                     Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);

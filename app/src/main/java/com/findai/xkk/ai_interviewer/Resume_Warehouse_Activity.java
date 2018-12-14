@@ -17,6 +17,7 @@ import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class Resume_Warehouse_Activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,7 +29,7 @@ public class Resume_Warehouse_Activity extends AppCompatActivity implements View
 
         User user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
         if(user == null){
-            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             Intent intent = new Intent(getBaseContext(),LoginActivity.class);
             startActivity(intent);
             finish();

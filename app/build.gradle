@@ -46,4 +46,6 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1371_43624_sharewithdownload_withoutGame_obfs_20181106_121046.jar')
     implementation 'com.coldmoqiuli:banners:1.0.1'
+    implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+
 }

@@ -17,18 +17,21 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.JobinfoActivity;
 import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.WelcomeIndexActivity;
+import com.findai.xkk.ai_interviewer.WelcomeInterviewActivity;
 import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.Question;
 import com.oragee.banners.BannerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +60,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
             case R.id.btn_kj_interview:
                 bundle = new Bundle();
                 bundle.putInt("iid",1);
-                intent = new Intent(getContext(),WelcomeIndexActivity.class);
+                intent = new Intent(getContext(),WelcomeInterviewActivity.class);
                 intent.putExtra("iid",bundle);
                 startActivity(intent);
                 break;
@@ -85,7 +88,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         this.callbackQuestion_choose_fragment = callbackQuestionChooseFragment;
 
     }
-    private int[] imgs = {R.mipmap.ad4,R.mipmap.ad3,R.mipmap.ad6,R.mipmap.ad7,R.mipmap.ad8,R.mipmap.ad1};
+    private int[] imgs = {R.mipmap.ad4,R.mipmap.ad6,R.mipmap.ad8,R.mipmap.ad1,R.mipmap.ad3};
     private List<View> viewList;
 
     @Nullable
@@ -98,6 +101,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         data = getData();
         lv.setAdapter(new JobListView_Adapter(getContext(), data));
         fixListViewHeight(lv);
+
 //                                fixListViewHeight(lv);
 //
 //        Thread thread1 = new Thread(new Runnable() {
@@ -164,7 +168,8 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
 //        ll_job = view.findViewById(R.id.ll_job);
 //        ll_job.setOnClickListener(this);
 
-
+        lv.setFocusable(false);
+        ((ScrollView)view.findViewById(R.id.sv_job_lastest)).scrollTo(0, 20) ;
 
         return view;
 
@@ -181,6 +186,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
             list.add(map);
         }
         System.out.println(list.size());
+        Collections.shuffle(list);
         return list;
     }
     public interface callbackQuestion_Choose_Fragment {
@@ -227,6 +233,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 
         listView.setLayoutParams(params);
+
 
     }
 

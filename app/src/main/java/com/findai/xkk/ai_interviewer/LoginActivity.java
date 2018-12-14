@@ -19,8 +19,10 @@ import android.widget.Toast;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
+import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     EditText et_username;
@@ -66,11 +68,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-
+                final Button btn_login = (Button) v;
+                btn_login.setEnabled(false);
                 username = et_username.getText().toString().trim();
                 password = et_password.getText().toString().trim();
                 if (username == null || username.equals("") || password == null || password.equals("")) {
-                    Toast.makeText(this, "请输入账号密码哦", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, "请输入账号密码哦", Toast.LENGTH_LONG).show();
+                    TastyToast.makeText(getApplicationContext(), "请输入账号密码哦", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+                    btn_login.setEnabled(true);
                     return;
                 } else {
                     user = new User();
@@ -87,19 +92,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Looper.prepare();
                                 if (!login_user.getStatus().equals("success")) {
                                     Toast.makeText(getBaseContext(), login_user.getStatus(), Toast.LENGTH_LONG).show();
+                                    btn_login.setEnabled(true);
+                                    return;
                                 } else {
-                                    Toast.makeText(getBaseContext(), "欢迎回来", Toast.LENGTH_LONG).show();
+                                    btn_login.setText("登录中……");
+//                                    Toast.makeText(getBaseContext(), "欢迎回来", Toast.LENGTH_LONG).show();
+                                    TastyToast.makeText(getApplicationContext(), "欢迎回来", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
                                     ACache.get(getBaseContext()).put(GlobalParams.Para_USER, login_user);
-                                    Intent intent = new Intent(getBaseContext(),JobCenterActivity.class);
+
+                                    final JobList joblist = cs.get_joblist(20);
+                                    Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
                                     Bundle bundle = new Bundle();
-                                    bundle.putSerializable("user", login_user);
-                                    intent.putExtra("user", bundle);
+                                    bundle.putSerializable("joblist", joblist);
+//                                    intent.putExtra("joblist", bundle);
+//                                    bundle.putSerializable("user", login_user);
+                                    intent.putExtra("joblist", bundle);
                                     startActivity(intent);
                                     finish();
+//
+//
+//                                    startActivity(intent);
+//                                    finish();
                                 }
                                 Looper.loop();
 //                            Looper.loop();
                                 }catch (Exception ex){
+                                    btn_login.setEnabled(true);
                                     ex.printStackTrace();
                                 }
                         }

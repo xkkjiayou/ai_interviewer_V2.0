@@ -7,9 +7,10 @@
     android:orientation="horizontal"
     android:background="#ececec"
     android:weightSum="12">
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <ScrollView
+        android:id="@+id/sv_job_lastest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,6 +95,7 @@
 
                 <ListView
                     android:id="@+id/lv_joblist"
+                    android:stackFromBottom="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </ListView>
@@ -111,6 +113,6 @@
 
         </LinearLayout>
 
-    <!--</ScrollView>-->
+    </ScrollView>
 
 </LinearLayout>

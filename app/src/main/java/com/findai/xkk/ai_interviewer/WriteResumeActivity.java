@@ -29,6 +29,7 @@ import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Education_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Myevaluate_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Workexperience_Fragment;
 import com.google.gson.Gson;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
 
         user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
         if(user == null){
-            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             Intent intent = new Intent(getBaseContext(),LoginActivity.class);
             startActivity(intent);
             finish();

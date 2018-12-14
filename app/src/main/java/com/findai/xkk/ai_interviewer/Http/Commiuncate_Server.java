@@ -40,6 +40,9 @@ public class Commiuncate_Server {
     String get_resume_by_uid_url = "http://115.159.59.188:5000/get_resume_by_uid?uid=";
     String get_jobdetails_by_jid_url = "http://115.159.59.188:5000/get_jobdetails?jobid=";
     String get_lastest_joblist_url= "http://115.159.59.188:5000/get_joblist?topk=";
+    String get_index_load_bitmap_url = "http://115.159.59.188:5000/get_loading_image";
+    String post_toudi_url = "http://115.159.59.188:5000/post_uid_jid";
+
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
         OkHttpClient client = new OkHttpClient();
@@ -200,9 +203,11 @@ public class Commiuncate_Server {
             ResumeWrapper rw  = gson.fromJson(str,ResumeWrapper.class);
             if(rw.getStatus().equals("success")){
                 resume = rw.getResume();
+                resume.setHasResume(true);
             }else
             {
                 resume = new Resume();
+                resume.setHasResume(false);
             }
             return resume;
         } else {
@@ -230,13 +235,8 @@ public class Commiuncate_Server {
             JobList rw  = gson.fromJson(str,JobList.class);
             if(rw.getStatus().equals("success")){
                 for (Job j : rw.getJobList()){
-                    Request imgrequest = new Request.Builder()
-                            .url(j.getCompanyLogo())
-                            .build();
-                    Response img_response = client.newCall(imgrequest).execute();
-                    InputStream inputStream = img_response.body().byteStream();//得到图片的流
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    j.setBitmap(BitmapUtil.Bitmap2Bytes(bitmap));
+
+                    j.setBitmap(BitmapUtil.Bitmap2Bytes(get_bitmap_from_url(j.getCompanyLogo())));
                 }
             }
 
@@ -264,4 +264,81 @@ public class Commiuncate_Server {
 
         return job;
     }
+
+    public Bitmap get_bitmap_from_url(String url) throws Exception{
+        OkHttpClient client = new OkHttpClient();
+        Request imgrequest = new Request.Builder()
+                .url(url)
+                .build();
+        Response img_response = client.newCall(imgrequest).execute();
+        InputStream inputStream = img_response.body().byteStream();//得到图片的流
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//        j.setBitmap(BitmapUtil.Bitmap2Bytes(bitmap));
+        return bitmap;
+    }
+
+
+    public Bitmap get_index_load_bitmap_url() throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+        String qurl = get_index_load_bitmap_url;
+        System.out.println(qurl);
+//        JobWrapper jobWrapper = new JobWrapper();
+        Request request = new Request.Builder().url(qurl).build();
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            String str = response.body().string();
+            return get_bitmap_from_url(str);
+//            System.out.println(str);
+//            JobWrapper rw  = gson.fromJson(str,JobWrapper.class);
+//            if(rw.getStatus().equals("success")){
+//                job = rw.getJob_details();
+//            }
+        }
+
+        return null;
+    }
+
+
+
+
+    public String post_toudi(String toudi_record) throws Exception {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+
+        OkHttpClient client = builder.build();
+        String url = post_toudi_url;
+        System.out.println(url);
+
+//        okHttpClient = builder.build();
+//        client.conn(30, TimeUnit.SECONDS); // connect timeout
+//        client.setReadTimeout(30, TimeUnit.SECONDS);    // socket timeout
+        RequestBody requestbody = new FormBody.Builder()
+                .add("uid_jid", toudi_record)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestbody)
+                .build();
+        System.out.println(request.toString());
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+            Log.d("投递结果上传", jsonString);
+
+//            Gson gson = new Gson();
+            return jsonString;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "";
+        }
+
+
+    }
+
 }

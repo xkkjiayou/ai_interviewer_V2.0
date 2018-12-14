@@ -19,6 +19,7 @@ import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     EditText et_username;
@@ -66,7 +67,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         nickname = et_nickname.getText().toString().trim();
         tele = et_tele.getText().toString().trim();
         if(username==null||username .equals("")||password==null||password.equals("")||nickname==null||nickname.equals("")||tele==null||tele.equals("")){
-            Toast.makeText(this,"请输入全部信息哦",Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,"请输入全部信息哦",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "请输入全部信息哦", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             return;
         }
         else {
@@ -84,12 +86,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                             Looper.prepare();
                             if(json.equals("success")){
-                                Toast.makeText(getBaseContext(),"注册成功，请登录",Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getBaseContext(),"注册成功，请登录",Toast.LENGTH_SHORT).show();
+                                TastyToast.makeText(getApplicationContext(), "注册成功，请登录", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
                                 Intent intent = new Intent(getBaseContext(),LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else {
-                                Toast.makeText(getBaseContext(),"账号已存在",Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getBaseContext(),"账号已存在",Toast.LENGTH_SHORT).show();
+                                TastyToast.makeText(getApplicationContext(), "账号已存在", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
                             }
                             System.out.println(json);
                             Looper.loop();

@@ -16,10 +16,21 @@ public class Resume implements Serializable {
     List<EducationExperience> eduexperience = new ArrayList<>();
     List<WorkExperience> workexperience = new ArrayList<>();
     String selfdescription;
+    boolean hasResume=false;
+
+
 
     public  Resume(){
         this.eduexperience.add(new EducationExperience());
         this.workexperience.add(new WorkExperience());
+    }
+
+    public boolean isHasResume() {
+        return hasResume;
+    }
+
+    public void setHasResume(boolean hasResume) {
+        this.hasResume = hasResume;
     }
 
     public int getUid() {

@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     android:background="#ececec"
     android:orientation="vertical">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
         <FrameLayout
             android:id="@+id/framelayout_job_maintop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </FrameLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 
     <LinearLayout
         android:layout_width="match_parent"

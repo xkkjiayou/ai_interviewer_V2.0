@@ -1,7 +1,9 @@
 package com.findai.xkk.ai_interviewer;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
+import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
@@ -159,13 +162,39 @@ public class JobCenterActivity extends AppCompatActivity implements RadioGroup.O
     }
     private void showfragment(){
 //        ft = fm.beginTransaction();
+        try{
 
-        CurrentFragment = job_index_maintop_fragment = new Job_Index_maintop_Fragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("joblist",(JobList)getIntent().getBundleExtra("joblist").getSerializable("joblist"));
-        job_index_maintop_fragment.setArguments(bundle);
-        ft.replace(R.id.framelayout_job_maintop,job_index_maintop_fragment);
-        ft.commit();
+            CurrentFragment = job_index_maintop_fragment = new Job_Index_maintop_Fragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("joblist",(JobList)getIntent().getBundleExtra("joblist").getSerializable("joblist"));
+            job_index_maintop_fragment.setArguments(bundle);
+            ft.replace(R.id.framelayout_job_maintop,job_index_maintop_fragment);
+            ft.commit();
+            return;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+//            final Commiuncate_Server cs = new Commiuncate_Server();
+////            Thread thread1 = new Thread(new Runnable() {
+////                @Override
+////                public void run() {
+////                    try {
+////                        final Bitmap bitmap = cs.get_index_load_bitmap_url();
+////                        joblist = cs.get_joblist(20);
+////                        Bundle bundle = new Bundle();
+////                        bundle.putSerializable("joblist", joblist);
+////                        Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
+////                        intent.putExtra("joblist", bundle);
+////                        startActivity(intent);
+////                        finish();
+////                    } catch (Exception ex) {
+////                        ex.printStackTrace();
+////                    }
+////                }
+////            });
+////            thread1.start();
+        }
+
 
     }
 

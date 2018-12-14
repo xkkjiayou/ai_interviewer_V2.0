@@ -20,6 +20,7 @@ import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -41,10 +42,12 @@ import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.Question;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
+import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.findai.xkk.ai_interviewer.question_fragment.question_choose_fragment;
 import com.findai.xkk.ai_interviewer.question_fragment.question_wenda_fragment;
 import com.google.gson.Gson;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -203,13 +206,14 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
 
         user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
         if(user == null){
-            Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             Intent intent = new Intent(getBaseContext(),LoginActivity.class);
             startActivity(intent);
             finish();
             return;
         }
         uid = user.getUid();
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("index_get_questionlist_bundle");

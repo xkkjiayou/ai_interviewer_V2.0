@@ -13,7 +13,7 @@ public class BitmapUtil {
 
     public static  byte[] Bitmap2Bytes(android.graphics.Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, baos);
+        bm.compress(android.graphics.Bitmap.CompressFormat.PNG, 50, baos);
         return baos.toByteArray();
     }
 
@@ -28,12 +28,12 @@ public class BitmapUtil {
 
     public static Bitmap toRoundBitmap(Bitmap bitmap) {
     // 前面同上，绘制图像分别需要bitmap，canvas，paint对象
-        bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, true);
-        Bitmap bm = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 410, 410, true);
+        Bitmap bm = Bitmap.createBitmap(410, 410, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bm);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         // 这里需要先画出一个圆
-        canvas.drawCircle(200, 200, 200, paint);
+        canvas.drawCircle(210, 210, 210, paint);
         // 圆画好之后将画笔重置一下
         paint.reset();
         // 设置图像合成模式，该模式为只在源图像和目标图像相交的地方绘制源图像

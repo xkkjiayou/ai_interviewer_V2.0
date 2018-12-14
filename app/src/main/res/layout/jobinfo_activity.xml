@@ -220,7 +220,7 @@
             android:background="#6699cc"
             android:layout_weight="6">
             <Button
-                android:id="@+id/rd_myinfo"
+                android:id="@+id/btn_toudi"
                 android:layout_width="0dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="22dp"
