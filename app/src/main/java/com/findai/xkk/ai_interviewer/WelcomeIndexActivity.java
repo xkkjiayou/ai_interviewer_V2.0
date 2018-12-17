@@ -23,6 +23,7 @@ import com.findai.xkk.ai_interviewer.domain.User;
 import com.findai.xkk.ai_interviewer.job_fragment.JobListView_Adapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -74,7 +75,9 @@ public class WelcomeIndexActivity extends AppCompatActivity {
                             rl_index_loading.setBackground(new BitmapDrawable(bitmap));
                         }
                     });
-                    joblist = cs.get_joblist(20);
+                    joblist = cs.get_joblist(15);
+                    Collections.shuffle(joblist.getJobList());
+//                    joblist.setJobList(
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("joblist", joblist);
                     Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);

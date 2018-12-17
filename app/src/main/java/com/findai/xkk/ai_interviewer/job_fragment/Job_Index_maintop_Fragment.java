@@ -42,7 +42,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final int p = position;
         Bundle bundle = new Bundle();
-        joblist.get(position).setBitmap(null);
+//        joblist.get(position).setBitmap(null);
         bundle.putSerializable("job",joblist.get(position));
 
         Intent intent = new Intent(getContext(),JobinfoActivity.class);
@@ -186,7 +186,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
             list.add(map);
         }
         System.out.println(list.size());
-        Collections.shuffle(list);
+//        Collections.shuffle(list);
         return list;
     }
     public interface callbackQuestion_Choose_Fragment {

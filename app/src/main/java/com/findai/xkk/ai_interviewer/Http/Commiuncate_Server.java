@@ -41,28 +41,38 @@ public class Commiuncate_Server {
     String get_jobdetails_by_jid_url = "http://115.159.59.188:5000/get_jobdetails?jobid=";
     String get_lastest_joblist_url= "http://115.159.59.188:5000/get_joblist?topk=";
     String get_index_load_bitmap_url = "http://115.159.59.188:5000/get_loading_image";
-    String post_toudi_url = "http://115.159.59.188:5000/post_uid_jid";
+    String post_toudi_url = "http://115.159.59.188:5000/post_job_application";
+    String check_toudi_url = "http://115.159.59.188:5000/check_job_application";
+    static OkHttpClient client;
+    static {
 
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+
+        client = builder.build();
+    }
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         String qurl = get_question_url + qid;
         System.out.println(qurl);
         Request request = new Request.Builder().url(qurl).build();
         Response response = client.newCall(request).execute();
         if (response.isSuccessful()) {
             String str = response.body().string();
-            System.out.println(str);
+//            System.out.println(str);
             return get_question_list(str);
         } else {
-
             throw new IOException("Unexpected code " + response);
         }
 //        return get_question_list("");
     }
 
     public String get_my_report_by_id(int uid) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         String qurl = get_question_url + "get_user_report_list/?userid=" + uid;
         Request request = new Request.Builder().url(qurl).build();
         Response response = client.newCall(request).execute();
@@ -90,12 +100,12 @@ public class Commiuncate_Server {
     }
 
     public String post_answer(String answer) throws Exception {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
-                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
-                .readTimeout(1, TimeUnit.MINUTES); // read timeout
-
-        OkHttpClient client = builder.build();
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+//                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+//                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+//
+//        OkHttpClient client = builder.build();
         String url = post_answer_url;
         System.out.println(url);
 
@@ -130,7 +140,7 @@ public class Commiuncate_Server {
 
     public String post_login(User user) throws Exception{
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add("user",gson.toJson(user))
 //                .add("password",user.getPassword())
@@ -149,7 +159,7 @@ public class Commiuncate_Server {
     }
 
     public String post_register(User user) throws Exception{
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add("user",gson.toJson(user))
 //                .add("password",user.getPassword())
@@ -169,7 +179,7 @@ public class Commiuncate_Server {
 
 
     public String post_resume(Resume resume) throws Exception{
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         System.out.println("上传的简历："+gson.toJson(resume));
         RequestBody requestBody = new FormBody.Builder()
                 .add("resume",gson.toJson(resume))
@@ -191,7 +201,7 @@ public class Commiuncate_Server {
 
     public Resume get_resume_by_uid(User user) throws Exception{
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         String qurl = get_resume_by_uid_url + user.getUid();
         System.out.println(qurl);
         Resume resume = new Resume();
@@ -222,7 +232,6 @@ public class Commiuncate_Server {
 
     public JobList get_joblist(int topk) throws Exception{
 
-        OkHttpClient client = new OkHttpClient();
         String qurl = get_lastest_joblist_url + topk;
         System.out.println(qurl);
         List<Job> joblist = new ArrayList<>();
@@ -245,9 +254,9 @@ public class Commiuncate_Server {
         return new JobList();
     }
 
-    public Job get_joblist(Job job) throws Exception{
+    public Job get_jobdetails(Job job) throws Exception{
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         String qurl = get_jobdetails_by_jid_url + job.getId_job();
         System.out.println(qurl);
         JobWrapper jobWrapper = new JobWrapper();
@@ -266,7 +275,7 @@ public class Commiuncate_Server {
     }
 
     public Bitmap get_bitmap_from_url(String url) throws Exception{
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         Request imgrequest = new Request.Builder()
                 .url(url)
                 .build();
@@ -280,7 +289,7 @@ public class Commiuncate_Server {
 
     public Bitmap get_index_load_bitmap_url() throws Exception{
 
-        OkHttpClient client = new OkHttpClient();
+//        OkHttpClient client = new OkHttpClient();
         String qurl = get_index_load_bitmap_url;
         System.out.println(qurl);
 //        JobWrapper jobWrapper = new JobWrapper();
@@ -302,28 +311,51 @@ public class Commiuncate_Server {
 
 
 
-    public String post_toudi(String toudi_record) throws Exception {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
-                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
-                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+    public String post_toudi(int uid,int jid) throws Exception {
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//
+//        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+//                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+//                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+//
+//        OkHttpClient client = builder.build();
+        String qurl = post_toudi_url+"?uid="+uid+"&jid="+jid+"";
+        System.out.println(qurl);
 
-        OkHttpClient client = builder.build();
-        String url = post_toudi_url;
-        System.out.println(url);
+        Request request = new Request.Builder().url(qurl).build();
+//        System.out.println(request.toString());
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            String jsonString = response.body().string();
+            Log.d("投递结果上传", jsonString);
 
-//        okHttpClient = builder.build();
-//        client.conn(30, TimeUnit.SECONDS); // connect timeout
-//        client.setReadTimeout(30, TimeUnit.SECONDS);    // socket timeout
-        RequestBody requestbody = new FormBody.Builder()
-                .add("uid_jid", toudi_record)
-                .build();
+//            Gson gson = new Gson();
+            return jsonString;
 
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestbody)
-                .build();
-        System.out.println(request.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "";
+        }
+
+
+    }
+
+
+
+    public String check_toudi(int uid,int jid) throws Exception {
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//
+//        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+//                .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+//                .readTimeout(1, TimeUnit.MINUTES); // read timeout
+//
+//        OkHttpClient client = builder.build();
+        String qurl =check_toudi_url+"?uid="+uid+"&jid="+jid+"";
+        System.out.println(qurl);
+
+        Request request = new Request.Builder().url(qurl).build();
+//        System.out.println(request.toString());
         Response response;
         try {
             response = client.newCall(request).execute();

@@ -81,45 +81,55 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     user = new User();
                     user.setPassword(password);
                     user.setUsername(username);
+
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            try{
-                                String json = cs.post_login(user);
-                                System.out.println(json);
-                                Gson gson = new Gson();
-                                User login_user = gson.fromJson(json, User.class);
-                                Looper.prepare();
-                                if (!login_user.getStatus().equals("success")) {
-                                    Toast.makeText(getBaseContext(), login_user.getStatus(), Toast.LENGTH_LONG).show();
-                                    btn_login.setEnabled(true);
-                                    return;
-                                } else {
-                                    btn_login.setText("登录中……");
-//                                    Toast.makeText(getBaseContext(), "欢迎回来", Toast.LENGTH_LONG).show();
-                                    TastyToast.makeText(getApplicationContext(), "欢迎回来", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                                    ACache.get(getBaseContext()).put(GlobalParams.Para_USER, login_user);
+                            try {
+                            Looper.prepare();
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    try{
+                                        String json = cs.post_login(user);
+                                        System.out.println(json);
+                                        Gson gson = new Gson();
+                                        User login_user = gson.fromJson(json, User.class);
 
-                                    final JobList joblist = cs.get_joblist(20);
-                                    Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("joblist", joblist);
+                                        if (!login_user.getStatus().equals("success")) {
+                                            TastyToast.makeText(getApplicationContext(), login_user.getStatus(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+//                                            btn_login.setEnabled(true);
+                                        } else {
+//                                            btn_login.setText("登录中……");
+//                                    Toast.makeText(getBaseContext(), "欢迎回来", Toast.LENGTH_LONG).show();
+                                            TastyToast.makeText(getApplicationContext(), "欢迎回来", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                                            ACache.get(getBaseContext()).put(GlobalParams.Para_USER, login_user);
+
+                                            final JobList joblist = cs.get_joblist(20);
+                                            Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
+                                            Bundle bundle = new Bundle();
+                                            bundle.putSerializable("joblist", joblist);
 //                                    intent.putExtra("joblist", bundle);
 //                                    bundle.putSerializable("user", login_user);
-                                    intent.putExtra("joblist", bundle);
-                                    startActivity(intent);
-                                    finish();
+                                            intent.putExtra("joblist", bundle);
+                                            startActivity(intent);
+                                            finish();
 //
 //
 //                                    startActivity(intent);
 //                                    finish();
-                                }
+                                        }
+                                btn_login.setEnabled(true);
                                 Looper.loop();
-//                            Looper.loop();
-                                }catch (Exception ex){
-                                    btn_login.setEnabled(true);
-                                    ex.printStackTrace();
-                                }
+                                    }catch (Exception ex){
+//                                        btn_login.setEnabled(true);
+                                        ex.printStackTrace();
+//                                Looper.loop();
+                                    }
+
+//                                }
+//                            }});
+
                         }
                     });
                     thread.start();
