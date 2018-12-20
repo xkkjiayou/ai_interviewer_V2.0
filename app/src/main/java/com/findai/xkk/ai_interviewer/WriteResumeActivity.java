@@ -14,12 +14,10 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.EducationExperience;
-import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.findai.xkk.ai_interviewer.domain.WorkExperience;
@@ -28,15 +26,12 @@ import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Basicinfo_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Education_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Myevaluate_Fragment;
 import com.findai.xkk.ai_interviewer.resume_fragment.Resume_Workexperience_Fragment;
-import com.google.gson.Gson;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class WriteResumeActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,ResumeInterface {
+public class WriteResumeActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, ResumeInterface {
 
     Bundle bundle;
     Resume resume = null;
@@ -49,6 +44,7 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
     Resume_Workexperience_Fragment resume_workexperience_fragment;
     Resume_Education_Fragment resume_education_fragment;
     User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +66,12 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
 
     }
 
-    public void init(){
+    public void init() {
 
-        user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
-        if(user == null){
+        user = (User) ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
+        if (user == null) {
             TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -88,7 +84,7 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
 
                 try {
                     resume = cs.get_resume_by_uid(user);
-                }catch (Exception ex) {
+                } catch (Exception ex) {
 
                     resume = new Resume();
                     ex.printStackTrace();
@@ -97,16 +93,16 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
             }
         });
         thread.start();
-        while(resume==null){
+        while (resume == null) {
             System.out.println("等待简历加载");
         }
 
-        if(resume.getEduexperience().size()==0){
+        if (resume.getEduexperience().size() == 0) {
             List<EducationExperience> l = new ArrayList<>();
             l.add(new EducationExperience());
             resume.setEduexperience(l);
         }
-        if(resume.getWorkexperience().size()==0){
+        if (resume.getWorkexperience().size() == 0) {
             List<WorkExperience> l = new ArrayList<>();
             l.add(new WorkExperience());
             resume.setWorkexperience(l);
@@ -127,7 +123,7 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
         resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
         Current_Fragment = resume_basicinfo_fragment;
         ((Resume_Basicinfo_Fragment) Current_Fragment).setArguments(bundle);
-        ft.replace(R.id.framelayout_resume,(Fragment)Current_Fragment);
+        ft.replace(R.id.framelayout_resume, (Fragment) Current_Fragment);
         ft.commit();
 
 
@@ -136,20 +132,20 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         ft = fm.beginTransaction();
-        switch (checkedId){
+        switch (checkedId) {
             case R.id.rd_resume_basicinfo:
                 ft.hide((Fragment) Current_Fragment);
                 Current_Fragment = resume_basicinfo_fragment;
 //                ft.replace(R.id.framelayout_resume,resume_basicinfo_fragment);
-                if (Current_Fragment==null){
+                if (Current_Fragment == null) {
 
-                    Current_Fragment =resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
+                    Current_Fragment = resume_basicinfo_fragment = new Resume_Basicinfo_Fragment(this);
                     ((Resume_Basicinfo_Fragment) Current_Fragment).setArguments(bundle);
 //                    Current_Fragment);
-                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                }else {
+                    ft.add(R.id.framelayout_resume, (Fragment) Current_Fragment);
+                } else {
 //                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                    ft.show((Fragment)Current_Fragment);
+                    ft.show((Fragment) Current_Fragment);
                 }
                 break;
 
@@ -159,13 +155,13 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
                 Current_Fragment = resume_myevaluate_fragment;
 //                ft.replace(R.id.framelayout_resume,resume_myevaluate_fragment);
 
-                if (Current_Fragment==null){
-                    Current_Fragment =resume_myevaluate_fragment = new Resume_Myevaluate_Fragment(this);
+                if (Current_Fragment == null) {
+                    Current_Fragment = resume_myevaluate_fragment = new Resume_Myevaluate_Fragment(this);
                     ((Resume_Myevaluate_Fragment) Current_Fragment).setArguments(bundle);
-                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                }else {
+                    ft.add(R.id.framelayout_resume, (Fragment) Current_Fragment);
+                } else {
 //                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                    ft.show((Fragment)Current_Fragment);
+                    ft.show((Fragment) Current_Fragment);
                 }
                 break;
             case R.id.rd_workexperience_basicinfo:
@@ -173,13 +169,13 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
                 Current_Fragment = resume_workexperience_fragment;
 //                ft.replace(R.id.framelayout_resume,resume_workexperience_fragment);
 
-                if (Current_Fragment==null){
-                    Current_Fragment =resume_workexperience_fragment = new Resume_Workexperience_Fragment(this);
+                if (Current_Fragment == null) {
+                    Current_Fragment = resume_workexperience_fragment = new Resume_Workexperience_Fragment(this);
                     ((Resume_Workexperience_Fragment) Current_Fragment).setArguments(bundle);
-                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                }else {
+                    ft.add(R.id.framelayout_resume, (Fragment) Current_Fragment);
+                } else {
 //                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                    ft.show((Fragment)Current_Fragment);
+                    ft.show((Fragment) Current_Fragment);
                 }
                 break;
             case R.id.rd_education_basicinfo:
@@ -187,13 +183,13 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
                 Current_Fragment = resume_education_fragment;
 //                ft.replace(R.id.framelayout_resume,resume_education_fragment);
 
-                if (Current_Fragment==null){
-                    Current_Fragment =resume_education_fragment = new Resume_Education_Fragment(this);
+                if (Current_Fragment == null) {
+                    Current_Fragment = resume_education_fragment = new Resume_Education_Fragment(this);
                     ((Resume_Education_Fragment) Current_Fragment).setArguments(bundle);
-                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                }else {
+                    ft.add(R.id.framelayout_resume, (Fragment) Current_Fragment);
+                } else {
 //                    ft.add(R.id.framelayout_resume, (Fragment)Current_Fragment);
-                    ft.show((Fragment)Current_Fragment);
+                    ft.show((Fragment) Current_Fragment);
                 }
                 break;
         }
@@ -215,17 +211,17 @@ public class WriteResumeActivity extends AppCompatActivity implements RadioGroup
                 try {
                     System.out.println("简历要开始post请求了");
                     resume.setUid(user.getUid());
-                    System.out.println("简历编辑者:"+resume.getUid());
+                    System.out.println("简历编辑者:" + resume.getUid());
                     String json = cs.post_resume(resume);
-                    if(json.equals("success")){
-                        Toast.makeText(getBaseContext(),"简历上传成功",Toast.LENGTH_LONG).show();
+                    if (json.equals("success")) {
+                        Toast.makeText(getBaseContext(), "简历上传成功", Toast.LENGTH_LONG).show();
                         finish();
-                    }else {
-                        Toast.makeText(getBaseContext(),"简历上传失败，请检查错误",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "简历上传失败，请检查错误", Toast.LENGTH_LONG).show();
 
                     }
                     System.out.println(json);
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }

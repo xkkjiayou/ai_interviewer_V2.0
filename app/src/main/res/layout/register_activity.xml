@@ -8,11 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="30dp"
         android:gravity="bottom"
         android:orientation="vertical"
         android:weightSum="12">
@@ -20,53 +20,57 @@
         <EditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
-            android:background="#506699cc"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="12"
-            android:hint="请输入您的账号" />
+            android:background="#506699cc"
+            android:hint="请输入您的账号"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:background="#506699cc"
             android:layout_height="wrap_content"
             android:layout_weight="12"
+            android:background="#506699cc"
+            android:hint="请输入您的密码"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
 
-            android:hint="请输入您的密码" />
+            android:paddingBottom="10dp" />
+
         <EditText
             android:id="@+id/et_nickname"
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:background="#506699cc"
             android:layout_height="wrap_content"
             android:layout_weight="12"
+            android:background="#506699cc"
+            android:hint="请输入您的昵称"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
 
-            android:hint="请输入您的昵称" />
+            android:paddingBottom="10dp" />
+
         <EditText
             android:id="@+id/et_tele"
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:background="#506699cc"
             android:layout_height="wrap_content"
             android:layout_weight="12"
+            android:background="#506699cc"
+            android:hint="请输入您的电话"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
 
-            android:hint="请输入您的电话" />
+            android:paddingBottom="10dp" />
+
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:background="@drawable/login_btn_selector"
-            android:textColor="#ffffff"
-            android:text="注册"/>
+            android:text="注册"
+            android:textColor="#ffffff" />
     </LinearLayout>
 </LinearLayout>

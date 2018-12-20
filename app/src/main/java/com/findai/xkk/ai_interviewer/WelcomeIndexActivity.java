@@ -10,34 +10,21 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
-import com.findai.xkk.ai_interviewer.Utils.ACache;
-import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
-import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
-import com.findai.xkk.ai_interviewer.domain.QuestionList;
-import com.findai.xkk.ai_interviewer.domain.User;
-import com.findai.xkk.ai_interviewer.job_fragment.JobListView_Adapter;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class WelcomeIndexActivity extends AppCompatActivity {
-
-    //    private Question_Data_Exe question_data_exe;
-//    private QuestionList questionList = null;
-//    int iid;
-    private JobList joblist = new JobList();
 
     final Commiuncate_Server cs = new Commiuncate_Server();
     RelativeLayout rl_index_loading;
     boolean job_loaded_flag = false;
+    //    private Question_Data_Exe question_data_exe;
+//    private QuestionList questionList = null;
+//    int iid;
+    private JobList joblist = new JobList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

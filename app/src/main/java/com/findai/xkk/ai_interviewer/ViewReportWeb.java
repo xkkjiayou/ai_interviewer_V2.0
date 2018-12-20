@@ -24,7 +24,7 @@ public class ViewReportWeb extends AppCompatActivity {
 
 //    String url="http://learn.clponline.cn/learnspace/sign/signLearn.action?params.template=2&loginType=true&sign=mobile&courseId=ff8080815b00afa0015b061aa9cd0269&siteCode=puhsc&domain=jy.clponline.cn&loginId=studentljx";
 
-//    String url="https://jinmingli.webtrn.cn/whaty-jwplayer/demo1.html";
+    //    String url="https://jinmingli.webtrn.cn/whaty-jwplayer/demo1.html";
     private WebView mWebView;
 
     @Override

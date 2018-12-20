@@ -17,9 +17,9 @@
         <Button
             android:id="@+id/btn_next_question"
             android:layout_width="wrap_content"
-            android:background="@drawable/btn_selector"
             android:layout_height="wrap_content"
             android:layout_weight="12"
+            android:background="@drawable/btn_selector"
             android:text="下一题" />
     </LinearLayout>
 </RelativeLayout>

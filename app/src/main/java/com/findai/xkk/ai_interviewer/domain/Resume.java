@@ -5,22 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Resume implements Serializable {
-    int uid=0;
-    String name="";
-    String birthday="";
-    String nativeplace="";
-    String gender="";
-    String tele="";
-    String email="";
-    String ideal="";
+    int uid = 0;
+    String name = "";
+    String birthday = "";
+    String nativeplace = "";
+    String gender = "";
+    String tele = "";
+    String email = "";
+    String ideal = "";
     List<EducationExperience> eduexperience = new ArrayList<>();
     List<WorkExperience> workexperience = new ArrayList<>();
     String selfdescription;
-    boolean hasResume=false;
+    boolean hasResume = false;
 
 
-
-    public  Resume(){
+    public Resume() {
         this.eduexperience.add(new EducationExperience());
         this.workexperience.add(new WorkExperience());
     }

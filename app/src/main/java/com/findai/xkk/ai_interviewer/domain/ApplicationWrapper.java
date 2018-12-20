@@ -1,6 +1,7 @@
 package com.findai.xkk.ai_interviewer.domain;
 
 public class ApplicationWrapper {
+
     Application result;
     String status;
 

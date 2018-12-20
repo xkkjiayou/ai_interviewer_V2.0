@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,34 +17,39 @@ import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.Resume_Warehouse_Activity;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
-import com.findai.xkk.ai_interviewer.WelcomeIndexActivity;
+import com.findai.xkk.ai_interviewer.ViewReportWeb;
 import com.findai.xkk.ai_interviewer.domain.User;
 
 @SuppressLint("ValidFragment")
-public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnClickListener{
+public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnClickListener {
 
     LinearLayout ll_myingo_setting;
     LinearLayout ll_logout;
+    LinearLayout ll_exp;
     TextView tv_username;
     TextView tv_userinfo;
-    LinearLayout ll_user_panel ;
+    LinearLayout ll_user_panel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.myinfo_fragment, container, false);
         User user = (User) ACache.get(getContext()).getAsObject(GlobalParams.Para_USER);
         tv_userinfo = view.findViewById(R.id.tv_userinfo);
+        ll_exp = view.findViewById(R.id.ll_myinfo_experienece);
+        ll_exp.setOnClickListener(this);
         tv_username = view.findViewById(R.id.tv_nickname);
         ll_myingo_setting = view.findViewById(R.id.ll_myingo_setting);
         ll_myingo_setting.setOnClickListener(this);
         ll_logout = view.findViewById(R.id.ll_logout);
         ll_logout.setOnClickListener(this);
-        if(user == null){
+
+        if (user == null) {
             tv_username.setText("请登录");
             tv_userinfo.setText("");
             ll_user_panel = view.findViewById(R.id.ll_user_panel);
             ll_user_panel.setOnClickListener(this);
-        }else {
+        } else {
 
             tv_username.setText(user.getNickname());
             tv_userinfo.setText("");
@@ -87,13 +91,22 @@ public class Myinfo_Index_maintop_Fragment extends Fragment implements View.OnCl
     @Override
     public void onClick(View v) {
         Intent intent;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_user_panel:
                 intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_myingo_setting:
                 intent = new Intent(getContext(), Resume_Warehouse_Activity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.ll_myinfo_experienece:
+//                String report_url = getIntent().getBundleExtra("report_url").getString("report_url");
+                Bundle bundle = new Bundle();
+                bundle.putString("report_url", "https://m.job592.com/pay/ms/");
+                intent = new Intent(getContext(), ViewReportWeb.class);
+                intent.putExtra("report_url", bundle);
                 startActivity(intent);
                 break;
             case R.id.ll_logout:

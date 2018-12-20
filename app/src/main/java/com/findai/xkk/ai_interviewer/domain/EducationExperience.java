@@ -1,17 +1,15 @@
 package com.findai.xkk.ai_interviewer.domain;
 
-import android.widget.EditText;
-
 import java.io.Serializable;
 
 public class EducationExperience implements Serializable {
 
-    String university="";
-    String major="";
-    String degree="";
-    String edudescription="";
-    String edu_year_start="";
-    String edu_year_end="";
+    String university = "";
+    String major = "";
+    String degree = "";
+    String edudescription = "";
+    String edu_year_start = "";
+    String edu_year_end = "";
 
     public String getUniversity() {
         return university;

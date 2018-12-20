@@ -34,7 +34,7 @@ public class Resume_Education_Fragment extends Fragment {
     ResumeInterface ri;
 
 
-    public Resume_Education_Fragment(ResumeInterface cb){
+    public Resume_Education_Fragment(ResumeInterface cb) {
         this.ri = cb;
     }
 
@@ -43,7 +43,7 @@ public class Resume_Education_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_education_resume_fragment, container, false);
         Bundle bundle = getArguments();
-        resume = (Resume)bundle.getSerializable("resume");
+        resume = (Resume) bundle.getSerializable("resume");
         et_university = view.findViewById(R.id.et_university);
         et_major = view.findViewById(R.id.et_major);
         et_degree = view.findViewById(R.id.et_degree);
@@ -61,7 +61,6 @@ public class Resume_Education_Fragment extends Fragment {
         et_edudescription.setText(resume.getEduexperience().get(0).getEdudescription());
         et_eduyear_start.setText(resume.getEduexperience().get(0).getEdu_year_start());
         et_eduyear_end.setText(resume.getEduexperience().get(0).getEdu_year_end());
-
 
 
         return view;
@@ -87,13 +86,13 @@ public class Resume_Education_Fragment extends Fragment {
         ee.setEdu_year_end(set_eduyear_end);
 
         list.add(ee);
-        String[] ss = new String[]{set_university,set_major,set_degree,set_edudescription};
-        if(set_university==null||set_university.equals("")
-                ||set_major==null||set_major.equals("")
-                ||set_degree==null||set_degree.equals("")
-                ||set_edudescription==null||set_edudescription.equals("")
-                ){
-            Toast.makeText(getContext(),"请填写内容哦",Toast.LENGTH_LONG).show();
+        String[] ss = new String[]{set_university, set_major, set_degree, set_edudescription};
+        if (set_university == null || set_university.equals("")
+                || set_major == null || set_major.equals("")
+                || set_degree == null || set_degree.equals("")
+                || set_edudescription == null || set_edudescription.equals("")
+                ) {
+            Toast.makeText(getContext(), "请填写内容哦", Toast.LENGTH_LONG).show();
             return;
         }
         ri.resume_eduexperience_interface_impl(list);

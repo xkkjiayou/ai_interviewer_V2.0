@@ -1,127 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="#ececec"
-    android:layout_height="match_parent">
-        <ScrollView
-            android:layout_width="match_parent"
+    android:orientation="vertical">
 
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:orientation="vertical">
 
-            android:background="#ffffff"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="2dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="学校："/>
-                <EditText
-                    android:id="@+id/et_university"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="专业："/>
-                <EditText
-                    android:id="@+id/et_major"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="学位："/>
-                <EditText
-                    android:id="@+id/et_degree"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="起始时间："/>
-                <EditText
-                    android:id="@+id/et_eduyear_start"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="结束时间："/>
-                <EditText
-                    android:id="@+id/et_eduyear_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:background="#ffffff"
+                android:orientation="vertical"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="描述："/>
-                <EditText
-                    android:id="@+id/et_edudescription"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:inputType="textMultiLine"
-                    android:background="@drawable/write_resume_et_selector"
-                    style="@style/write_resume_et_css"
-                    />
-            </LinearLayout>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学校：" />
+
+                    <EditText
+                        android:id="@+id/et_university"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/write_resume_et_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="专业：" />
+
+                    <EditText
+                        android:id="@+id/et_major"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/write_resume_et_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="学位：" />
+
+                    <EditText
+                        android:id="@+id/et_degree"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/write_resume_et_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="起始时间：" />
+
+                    <EditText
+                        android:id="@+id/et_eduyear_start"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/write_resume_et_selector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="结束时间：" />
+
+                    <EditText
+                        android:id="@+id/et_eduyear_end"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/write_resume_et_selector" />
                 </LinearLayout>
 
-                <!--<Button-->
-                    <!--android:id="@+id/btn_next_resume"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_marginTop="30dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@drawable/login_btn_selector"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:text="下一步"/>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="描述：" />
+
+                    <EditText
+                        android:id="@+id/et_edudescription"
+                        style="@style/write_resume_et_css"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/write_resume_et_selector"
+                        android:inputType="textMultiLine" />
+                </LinearLayout>
             </LinearLayout>
+
+            <!--<Button-->
+            <!--android:id="@+id/btn_next_resume"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/login_btn_selector"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:text="下一步"/>-->
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

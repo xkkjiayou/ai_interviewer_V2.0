@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector  xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_focused="true" android:drawable="@drawable/write_resume_et_shape_focus_true"/>
-    <item android:state_focused="false" android:drawable="@drawable/write_resume_et_shape_focus_false"/>
+    <item android:drawable="@drawable/write_resume_et_shape_focus_true" android:state_focused="true" />
+    <item android:drawable="@drawable/write_resume_et_shape_focus_false" android:state_focused="false" />
 
 </selector>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ececec"
@@ -19,50 +18,50 @@
             android:id="@+id/rg_resume_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:background="#ffffff"
             android:checkedButton="@+id/rd_job_center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <RadioButton
                 android:id="@+id/rd_resume_basicinfo"
                 android:layout_width="0dp"
-                android:background="#ffffff"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:background="#ffffff"
                 android:button="@null"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="基本信息"
                 android:textSize="14dp" />
 
             <RadioButton
                 android:id="@+id/rd_education_basicinfo"
                 android:layout_width="0dp"
-                android:background="#ffffff"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:background="#ffffff"
                 android:button="@null"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="教育经历"
                 android:textSize="14dp" />
 
             <RadioButton
                 android:id="@+id/rd_workexperience_basicinfo"
                 android:layout_width="0dp"
-                android:background="#ffffff"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="3"
+                android:background="#ffffff"
                 android:button="@null"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="工作经历"
                 android:textSize="14dp" />
 
@@ -70,12 +69,12 @@
                 android:id="@+id/rd_myevaluate_basicinfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="#ffffff"
                 android:layout_weight="3"
+                android:background="#ffffff"
                 android:button="@null"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="自我介绍"
                 android:textSize="14dp" />
 
@@ -83,11 +82,11 @@
     </LinearLayout>
 
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
         <FrameLayout
             android:id="@+id/framelayout_resume"
             android:layout_width="match_parent"

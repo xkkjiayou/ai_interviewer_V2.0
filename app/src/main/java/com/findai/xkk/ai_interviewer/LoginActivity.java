@@ -6,15 +6,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
@@ -24,7 +21,7 @@ import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
 import com.sdsmdg.tastytoast.TastyToast;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText et_username;
     EditText et_password;
     Button btn_login;
@@ -56,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         et_password = findViewById(R.id.et_password);
-        et_username= findViewById(R.id.et_username);
+        et_username = findViewById(R.id.et_username);
         btn_login = findViewById(R.id.btn_login);
         btn_tiaozhuan_register = findViewById(R.id.btn_tiaozhuan_register);
 
@@ -86,46 +83,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run() {
                             try {
-                            Looper.prepare();
+                                Looper.prepare();
 //                            runOnUiThread(new Runnable() {
 //                                @Override
 //                                public void run() {
 //                                    try{
-                                        String json = cs.post_login(user);
-                                        System.out.println(json);
-                                        Gson gson = new Gson();
-                                        User login_user = gson.fromJson(json, User.class);
+                                String json = cs.post_login(user);
+                                System.out.println(json);
+                                Gson gson = new Gson();
+                                User login_user = gson.fromJson(json, User.class);
 
-                                        if (!login_user.getStatus().equals("success")) {
-                                            TastyToast.makeText(getApplicationContext(), login_user.getStatus(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                                if (!login_user.getStatus().equals("success")) {
+                                    TastyToast.makeText(getApplicationContext(), login_user.getStatus(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
 //                                            btn_login.setEnabled(true);
-                                        } else {
+                                } else {
 //                                            btn_login.setText("登录中……");
 //                                    Toast.makeText(getBaseContext(), "欢迎回来", Toast.LENGTH_LONG).show();
-                                            TastyToast.makeText(getApplicationContext(), "欢迎回来", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                                            ACache.get(getBaseContext()).put(GlobalParams.Para_USER, login_user);
+                                    TastyToast.makeText(getApplicationContext(), "欢迎回来", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
+                                    ACache.get(getBaseContext()).put(GlobalParams.Para_USER, login_user);
 
-                                            final JobList joblist = cs.get_joblist(20);
-                                            Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
-                                            Bundle bundle = new Bundle();
-                                            bundle.putSerializable("joblist", joblist);
+                                    final JobList joblist = cs.get_joblist(20);
+                                    Intent intent = new Intent(getBaseContext(), JobCenterActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("joblist", joblist);
 //                                    intent.putExtra("joblist", bundle);
 //                                    bundle.putSerializable("user", login_user);
-                                            intent.putExtra("joblist", bundle);
-                                            startActivity(intent);
-                                            finish();
+                                    intent.putExtra("joblist", bundle);
+                                    startActivity(intent);
+                                    finish();
 //
 //
 //                                    startActivity(intent);
 //                                    finish();
-                                        }
+                                }
                                 btn_login.setEnabled(true);
                                 Looper.loop();
-                                    }catch (Exception ex){
+                            } catch (Exception ex) {
 //                                        btn_login.setEnabled(true);
-                                        ex.printStackTrace();
+                                ex.printStackTrace();
 //                                Looper.loop();
-                                    }
+                            }
 
 //                                }
 //                            }});
@@ -136,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.btn_tiaozhuan_register:
-                Intent intent = new Intent(this,RegisterActivity.class);
+                Intent intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
         }
     }

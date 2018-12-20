@@ -5,23 +5,17 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
-import com.findai.xkk.ai_interviewer.Utils.ACache;
-import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.User;
-import com.google.gson.Gson;
 import com.sdsmdg.tastytoast.TastyToast;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText et_username;
     EditText et_password;
     EditText et_tele;
@@ -51,9 +45,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         et_password = findViewById(R.id.et_password);
-        et_username= findViewById(R.id.et_username);
+        et_username = findViewById(R.id.et_username);
         et_tele = findViewById(R.id.et_tele);
-        et_nickname= findViewById(R.id.et_nickname);
+        et_nickname = findViewById(R.id.et_nickname);
         btn_register = findViewById(R.id.btn_register);
 
 
@@ -66,12 +60,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         password = et_password.getText().toString().trim();
         nickname = et_nickname.getText().toString().trim();
         tele = et_tele.getText().toString().trim();
-        if(username==null||username .equals("")||password==null||password.equals("")||nickname==null||nickname.equals("")||tele==null||tele.equals("")){
+        if (username == null || username.equals("") || password == null || password.equals("") || nickname == null || nickname.equals("") || tele == null || tele.equals("")) {
 //            Toast.makeText(this,"请输入全部信息哦",Toast.LENGTH_LONG).show();
             TastyToast.makeText(getApplicationContext(), "请输入全部信息哦", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
             return;
-        }
-        else {
+        } else {
             final User user = new User();
             user.setPassword(password);
             user.setUsername(username);
@@ -85,20 +78,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             String json = cs.post_register(user);
 
                             Looper.prepare();
-                            if(json.equals("success")){
+                            if (json.equals("success")) {
 //                                Toast.makeText(getBaseContext(),"注册成功，请登录",Toast.LENGTH_SHORT).show();
                                 TastyToast.makeText(getApplicationContext(), "注册成功，请登录", TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
-                                Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+                                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                                 startActivity(intent);
                                 finish();
-                            }else {
+                            } else {
 //                                Toast.makeText(getBaseContext(),"账号已存在",Toast.LENGTH_SHORT).show();
                                 TastyToast.makeText(getApplicationContext(), "账号已存在", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
                             }
                             System.out.println(json);
                             Looper.loop();
                             return;
-                        }catch (Exception ec){
+                        } catch (Exception ec) {
                             ec.printStackTrace();
                         }
 //                        Toast.makeText(this,json,Toast.LENGTH_LONG).show();
@@ -122,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                }
 
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }

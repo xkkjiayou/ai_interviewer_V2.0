@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector  xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_checked="true" android:drawable="@drawable/toudi_record_touch"/>
-    <item android:state_checked="false" android:drawable="@drawable/toudi_record_untouch"/>
+    <item android:drawable="@drawable/toudi_record_touch" android:state_checked="true" />
+    <item android:drawable="@drawable/toudi_record_untouch" android:state_checked="false" />
 
 </selector>

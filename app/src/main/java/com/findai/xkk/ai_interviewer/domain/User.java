@@ -2,7 +2,7 @@ package com.findai.xkk.ai_interviewer.domain;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
     String username;
     String password;
     String nickname;
@@ -24,16 +24,16 @@ public class User implements Serializable{
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

@@ -5,54 +5,56 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
+            android:orientation="vertical"
             android:paddingTop="10dp"
-            android:paddingBottom="15dp"
-            android:orientation="vertical">
+            android:paddingBottom="15dp">
 
             <TextView
                 android:id="@+id/tv_question_wenda_title"
                 style="@style/question_title_css"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:orientation="horizontal"
             android:background="#ececec"
-            ></LinearLayout>
+            android:orientation="horizontal"></LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
             <Button
                 android:id="@+id/btn_wenda_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:background="@drawable/btn_selector"
                 android:layout_marginTop="20dp"
                 android:layout_weight="6"
-                android:text="点击回答" />
+                android:background="@drawable/btn_selector"
+                android:text="点击回答"
+                android:textColor="#ffffff" />
 
             <!--<pl.droidsonroids.gif.GifImageView-->
-                <!--android:id="@+id/btn_wenda_answer"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="150dip"-->
-                <!--android:background="#ffffff"-->
-                <!--android:src="@mipmap/yuyin_loading"-->
-                <!--/>-->
+            <!--android:id="@+id/btn_wenda_answer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150dip"-->
+            <!--android:background="#ffffff"-->
+            <!--android:src="@mipmap/yuyin_loading"-->
+            <!--/>-->
 
 
             <TextView
@@ -60,8 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="12dp"
-                android:text="你的答案：" />
+                android:text="你的答案："
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_yuyin_log"

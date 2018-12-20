@@ -11,14 +11,14 @@ import java.io.ByteArrayOutputStream;
 
 public class BitmapUtil {
 
-    public static  byte[] Bitmap2Bytes(android.graphics.Bitmap bm) {
+    public static byte[] Bitmap2Bytes(android.graphics.Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(android.graphics.Bitmap.CompressFormat.PNG, 50, baos);
         return baos.toByteArray();
     }
 
 
-    public static  Bitmap Bytes2Bimap(byte[] b) {
+    public static Bitmap Bytes2Bimap(byte[] b) {
         if (b.length != 0) {
             return BitmapFactory.decodeByteArray(b, 0, b.length);
         } else {
@@ -27,7 +27,7 @@ public class BitmapUtil {
     }
 
     public static Bitmap toRoundBitmap(Bitmap bitmap) {
-    // 前面同上，绘制图像分别需要bitmap，canvas，paint对象
+        // 前面同上，绘制图像分别需要bitmap，canvas，paint对象
         bitmap = Bitmap.createScaledBitmap(bitmap, 410, 410, true);
         Bitmap bm = Bitmap.createBitmap(410, 410, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bm);

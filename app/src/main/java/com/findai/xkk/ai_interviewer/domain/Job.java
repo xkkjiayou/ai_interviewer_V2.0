@@ -1,7 +1,5 @@
 package com.findai.xkk.ai_interviewer.domain;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 
 public class Job implements Serializable {
@@ -24,6 +22,15 @@ public class Job implements Serializable {
     String workPlace;
     int workType;
 
+    String application_status;
+
+    public String getApplication_status() {
+        return application_status;
+    }
+
+    public void setApplication_status(String application_status) {
+        this.application_status = application_status;
+    }
 
     public byte[] getBitmap() {
         return bitmap;

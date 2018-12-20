@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ececec"
     android:orientation="vertical">
 
@@ -19,172 +19,182 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:background="#FFFFFF"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:paddingBottom="15dp"
-
-                    android:paddingTop="15dp"
                     android:layout_gravity="center"
-                    android:text="职 位 详 情 介 绍"/>
+                    android:paddingTop="15dp"
+
+                    android:paddingBottom="15dp"
+                    android:text="职 位 详 情 介 绍"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:background="#ffffff"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--android:weightSum="12"-->
-                <!--android:orientation="horizontal">-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="8">-->
-                    <!--<ImageView-->
-                        <!--android:id="@+id/img_job_img"-->
-                        <!--android:layout_width="80dp"-->
-                        <!--android:layout_height="80dp"-->
-                        <!--android:src="@mipmap/company_icon1"/>-->
-                <!--</LinearLayout>-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="4"-->
-                    <!--android:orientation="vertical">-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_companyname"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textColor="#888888"-->
-                        <!--android:text="自媒体商务（实习生）"-->
-                        <!--android:textSize="15dp"/>-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_degree_place_enddate"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textColor="#888888"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:textSize="12dp"-->
-                        <!--android:text="本科 | 福建福州| 截止时间：02-03"/>-->
-                <!--</LinearLayout>-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:background="#ffffff"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:weightSum="12"-->
+            <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="8">-->
+            <!--<ImageView-->
+            <!--android:id="@+id/img_job_img"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:src="@mipmap/company_icon1"/>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="4"-->
+            <!--android:orientation="vertical">-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_companyname"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#888888"-->
+            <!--android:text="自媒体商务（实习生）"-->
+            <!--android:textSize="15dp"/>-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_degree_place_enddate"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="#888888"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:textSize="12dp"-->
+            <!--android:text="本科 | 福建福州| 截止时间：02-03"/>-->
+            <!--</LinearLayout>-->
             <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="20dp"
-                android:background="#ffffff"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:background="#ffffff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                >
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
                 <ImageView
                     android:id="@+id/img_job_img"
-                    android:layout_marginTop="10dp"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/jobimg_shape"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@mipmap/company_icon1"/>
+                    android:background="@drawable/jobimg_shape"
+                    android:src="@mipmap/company_icon1" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_jobname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="加载中……"/>
-                    <TextView
-                        android:id="@+id/tv_salary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:textColor="#CC3333"
-                        android:text="……"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_degree_place"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="……"
-                        android:textColor="#888888"
-                        android:layout_marginBottom="8dp"
-                        android:textSize="12dp"/>
-                    <TextView
-                        android:id="@+id/tv_enddate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="……"
-                        android:textColor="#888888"
-                        android:textSize="12dp"/>
-                </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_jobname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="加载中……" />
+
+                        <TextView
+                            android:id="@+id/tv_salary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="……"
+                            android:textColor="#CC3333" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_degree_place"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:text="……"
+                            android:textColor="#888888"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/tv_enddate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="……"
+                            android:textColor="#888888"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                android:paddingTop="20dp"
                 android:layout_marginTop="8dp"
-                android:background="#ffffff"
                 android:layout_marginBottom="100dp"
+                android:background="#ffffff"
                 android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
                 android:paddingRight="20dp"
-                android:paddingLeft="20dp">
+                android:paddingBottom="20dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="职位描述："
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:textFontWeight="900"
                     android:layout_marginBottom="10dp"
-                    />
+                    android:text="职位描述："
+                    android:textFontWeight="900"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_job_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""/>
+                    android:text="" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="职位要求："
-                    android:textFontWeight="900"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp"
+                    android:text="职位要求："
+                    android:textFontWeight="900"
                     android:textSize="16dp"
-                    />
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_job_request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" "/>
+                    android:text=" " />
 
             </LinearLayout>
         </LinearLayout>
@@ -195,84 +205,91 @@
         style="@style/question_css"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:weightSum="12">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="6"
+            android:layout_weight="6"
             android:background="#ffffff"
-            android:layout_weight="6">
+            android:orientation="horizontal"
+            android:weightSum="6">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_weight="3">
+                android:orientation="horizontal">
+
                 <com.sackcentury.shinebuttonlib.ShineButton
+                    android:id="@+id/sbtn_fenxiang"
                     android:layout_width="30dp"
-                    android:layout_gravity="center"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:src="@android:color/darker_gray"
-                    android:id="@+id/sbtn_fenxiang"
+                    app:allow_random_color="false"
                     app:btn_color="@android:color/darker_gray"
                     app:btn_fill_color="@android:color/holo_red_light"
-                    app:allow_random_color="false"
-                    app:siShape="@raw/heart"/>
+                    app:siShape="@raw/heart" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_weight="3">
+                android:orientation="horizontal">
+
                 <com.sackcentury.shinebuttonlib.ShineButton
+                    android:id="@+id/sbtn_shoucang"
                     android:layout_width="30dp"
-                    android:layout_gravity="center"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:src="@android:color/darker_gray"
-                    android:id="@+id/sbtn_shoucang"
+                    app:allow_random_color="false"
                     app:btn_color="@android:color/darker_gray"
                     app:btn_fill_color="@android:color/holo_orange_dark"
-                    app:allow_random_color="false"
-                    app:siShape="@raw/like"/>
+                    app:siShape="@raw/like" />
             </LinearLayout>
             <!--<Button-->
-                <!--android:id="@+id/rd_toudi"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#FFFFFF"-->
-                <!--android:layout_weight="3"-->
-                <!--android:button="@null"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:drawableTop="@drawable/navigation_toudibtn_selector"-->
-                <!--android:gravity="center"-->
-                <!--android:text="收藏"-->
-                <!--android:textSize="12dp" />-->
+            <!--android:id="@+id/rd_toudi"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#FFFFFF"-->
+            <!--android:layout_weight="3"-->
+            <!--android:button="@null"-->
+            <!--android:paddingTop="8dp"-->
+            <!--android:drawableTop="@drawable/navigation_toudibtn_selector"-->
+            <!--android:gravity="center"-->
+            <!--android:text="收藏"-->
+            <!--android:textSize="12dp" />-->
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#6699cc"
-            android:layout_weight="6">
+            android:layout_weight="6"
+            android:background="#6699cc">
+
             <Button
                 android:id="@+id/btn_toudi"
                 android:layout_width="0dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="22dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="#6699cc"
                 android:layout_weight="6"
+                android:background="#6699cc"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="#ffffff"
+                android:paddingTop="20dp"
+                android:paddingBottom="22dp"
                 android:text="投递简历与面试"
+                android:textColor="#ffffff"
                 android:textSize="14dp" />
         </LinearLayout>
 

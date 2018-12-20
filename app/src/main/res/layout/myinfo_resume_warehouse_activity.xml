@@ -1,70 +1,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="#ececec"
+    android:clickable="true"
     android:orientation="vertical">>
-        <LinearLayout
 
-            android:layout_width="match_parent"
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:paddingTop="20dp"
-            android:background="#ffffff"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+            android:gravity="center"
 
-                android:text="简历中心"/>
-        </LinearLayout>
+            android:text="简历中心" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_myresume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#ffffff">
+        android:paddingRight="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            >
+            android:layout_marginBottom="10dp">
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/reusme_bg"/>
+                android:src="@mipmap/reusme_bg" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="50dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="我的简历"/>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_gravity="left"
                 android:paddingLeft="50dp"
-                android:layout_marginTop="10dp"
+                android:text="我的简历"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="编辑于2018/12/04"/>
+                android:layout_gravity="left"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="50dp"
+                android:text="编辑于2018/12/04" />
         </LinearLayout>
     </LinearLayout>
 

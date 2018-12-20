@@ -7,20 +7,14 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,7 +28,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
@@ -42,7 +35,6 @@ import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.Question;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
-import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.findai.xkk.ai_interviewer.question_fragment.question_choose_fragment;
 import com.findai.xkk.ai_interviewer.question_fragment.question_wenda_fragment;
@@ -60,9 +52,11 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     static {
         System.loadLibrary("native-lib");
     }
-    int uid=0;
+
+    int uid = 0;
     String img_base64 = "";
     QuestionList questionList = null;
+    User user;
     private Camera camera;
     private SurfaceHolder sh;
     private SurfaceView sv_camera;
@@ -71,7 +65,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     private FragmentManager fm = getSupportFragmentManager();
     private FragmentTransaction ft = fm.beginTransaction();
     private Matrix matrix = new Matrix();
-//    private SurfaceView sv_camera_face;
+    //    private SurfaceView sv_camera_face;
 //    private SurfaceHolder sv_camera_face_holder;
     private Button btn_next;
     private boolean hasface = false;
@@ -91,7 +85,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
                         Bitmap bmp = BitmapFactory.decodeByteArray(
                                 stream.toByteArray(), 0, stream.size());
                         stream.close();
-                        bmp = adjustPhotoRotation(bmp,-90);
+                        bmp = adjustPhotoRotation(bmp, -90);
                         img_base64 = bitmapToBase64(bmp);
 //                        System.out.println(img_base64);
                     }
@@ -108,22 +102,6 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
     private Iterator<Question> questionIterator;
     private TextView tv_has_face;
 
-    public Bitmap adjustPhotoRotation(Bitmap bm, final int orientationDegree)
-    {
-
-        Matrix m = new Matrix();
-        m.setRotate(orientationDegree, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-
-        try {
-            Bitmap bm1 = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), m, true);
-
-            return bm1;
-
-        } catch (OutOfMemoryError ex) {
-        }
-        return null;
-
-    }
     /**
      * bitmap转为base64
      *
@@ -182,6 +160,22 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         matrix.postTranslate(viewWidth / 2f, viewHeight / 2f);
     }
 
+    public Bitmap adjustPhotoRotation(Bitmap bm, final int orientationDegree) {
+
+        Matrix m = new Matrix();
+        m.setRotate(orientationDegree, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
+
+        try {
+            Bitmap bm1 = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), m, true);
+
+            return bm1;
+
+        } catch (OutOfMemoryError ex) {
+        }
+        return null;
+
+    }
+
     @Override
     public int get_question_answer(int answer) {
 //        System.out.println("ACTivity"+answer);
@@ -196,7 +190,7 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
 //        System.out.println("ACT_wenda:"+answer);
         return answer;
     }
-    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,10 +198,10 @@ public class InterviewMainActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.interview_main_activity);
 //        user = (User) ACache.get(this).getAsObject(GlobalParams.Para_USER);
 
-        user = (User)ACache.get(this).getAsObject(GlobalParams.Para_USER);
-        if(user == null){
+        user = (User) ACache.get(this).getAsObject(GlobalParams.Para_USER);
+        if (user == null) {
             TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
             return;

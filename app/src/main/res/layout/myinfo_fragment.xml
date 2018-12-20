@@ -4,52 +4,58 @@
     android:layout_height="match_parent"
     android:background="#ececec"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
         android:background="#FFFFFF"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp">
         <!--头像banner-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:weightSum="12"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="12">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="8">
+                android:layout_weight="8"
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@mipmap/myinfo_userhead"/>
+                    android:src="@mipmap/myinfo_userhead" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_user_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="4"
+                android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#333333"
                     android:text="小康康"
-                    android:textSize="15dp"/>
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+
                 <TextView
                     android:id="@+id/tv_userinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#888888"
                     android:layout_marginTop="5dp"
-                    android:textSize="12dp"
-                    android:text="硕士 | 中国科学技术大学| 人工智能"/>
+                    android:text="硕士 | 中国科学技术大学| 人工智能"
+                    android:textColor="#888888"
+                    android:textSize="12dp" />
             </LinearLayout>
         </LinearLayout>
         <!--头像banner end-->
@@ -64,35 +70,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#FFFFFF"
             android:layout_marginBottom="0.5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:weightSum="12"
-            android:orientation="horizontal">
+            android:weightSum="12">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="10">
+                android:layout_weight="10"
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/myinfo_basicinfo"/>
+                    android:src="@mipmap/myinfo_basicinfo" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_weight="2"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#333333"
                     android:text="密码修改"
-                    android:textSize="15dp"/>
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
         <!--基本信息banner end-->
@@ -102,71 +112,123 @@
             android:id="@+id/ll_myingo_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#FFFFFF"
             android:layout_marginBottom="0.5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:weightSum="12"
-            android:orientation="horizontal">
+            android:weightSum="12">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="10">
+                android:layout_weight="10"
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/myinfo_resume"/>
+                    android:src="@mipmap/myinfo_resume" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_weight="2"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#333333"
                     android:text="我的简历库"
-                    android:textSize="15dp"/>
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
         <!--简历库banner end-->
+
+        <!--简历库banner-->
+        <LinearLayout
+            android:id="@+id/ll_myinfo_experienece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0.5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:weightSum="12">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/myinfo_resume" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="求职经验库"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--求职经验库banner end-->
+
+
         <!--设置banner-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#FFFFFF"
             android:layout_marginBottom="0.5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:weightSum="12"
-            android:orientation="horizontal">
+            android:weightSum="12">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="10">
+                android:layout_weight="10"
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/myinfo_setting"/>
+                    android:src="@mipmap/myinfo_setting" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_weight="2"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#333333"
                     android:text="设置"
-                    android:textSize="15dp"/>
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
         <!--设置banner end-->
@@ -176,36 +238,40 @@
             android:id="@+id/ll_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#FFFFFF"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="0.5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:layout_marginTop="20dp"
-            android:weightSum="12"
-            android:orientation="horizontal">
+            android:weightSum="12">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="10">
+                android:layout_weight="10"
+                android:gravity="center">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/icon_logout"/>
+                    android:src="@mipmap/icon_logout" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_weight="2"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#333333"
                     android:text="注销"
-                    android:textSize="15dp"/>
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
         <!--退出登录banner end-->

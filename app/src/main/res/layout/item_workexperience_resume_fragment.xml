@@ -1,90 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:background="#ffffff"
+    android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="20dp"
-    android:layout_height="match_parent">
+    android:paddingBottom="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="公司名称："/>
+            android:text="公司名称：" />
+
         <EditText
             android:id="@+id/et_companyname"
+            style="@style/write_resume_et_css"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/write_resume_et_selector"
-            style="@style/write_resume_et_css"
-            />
+            android:background="@drawable/write_resume_et_selector" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="职位："/>
+            android:text="职位：" />
+
         <EditText
             android:id="@+id/et_jobname"
+            style="@style/write_resume_et_css"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/write_resume_et_selector"
-            style="@style/write_resume_et_css"
-            />
+            android:background="@drawable/write_resume_et_selector" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="工作起始时间："/>
+            android:text="工作起始时间：" />
+
         <EditText
             android:id="@+id/et_workyear_start"
+            style="@style/write_resume_et_css"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/write_resume_et_selector"
-            style="@style/write_resume_et_css"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="工作结束时间："/>
-        <EditText
-            android:id="@+id/et_workyear_end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/write_resume_et_selector"
-            style="@style/write_resume_et_css"
-            />
+            android:background="@drawable/write_resume_et_selector" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:text="简要描述："/>
+            android:layout_marginTop="10dp"
+            android:text="工作结束时间：" />
+
+        <EditText
+            android:id="@+id/et_workyear_end"
+            style="@style/write_resume_et_css"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/write_resume_et_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="简要描述：" />
+
         <EditText
             android:id="@+id/et_jobdescription"
+            style="@style/write_resume_et_css"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:inputType="textMultiLine"
             android:background="@drawable/write_resume_et_selector"
-            style="@style/write_resume_et_css"
-            />
+            android:inputType="textMultiLine" />
         <!--<Button-->
-            <!--android:id="@+id/btn_next_resume"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/login_btn_selector"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:text="下一步"/>-->
+        <!--android:id="@+id/btn_next_resume"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/login_btn_selector"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:text="下一步"/>-->
     </LinearLayout>
 </LinearLayout>

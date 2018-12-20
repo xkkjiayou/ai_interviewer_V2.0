@@ -4,16 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
@@ -27,7 +24,7 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import com.sdsmdg.tastytoast.TastyToast;
 
 
-public class JobinfoActivity extends AppCompatActivity{
+public class JobinfoActivity extends AppCompatActivity {
 
     TextView tv_jobname;
     TextView tv_salary;
@@ -41,14 +38,15 @@ public class JobinfoActivity extends AppCompatActivity{
     Button btn_toudi;
     ApplicationWrapper aw = new ApplicationWrapper();
     User user;
+
     @Override
     protected void onResume() {
         super.onResume();
         System.out.println("进入resume刷新");
-        if(is_login()==false){
+        if (is_login() == false) {
             btn_toudi.setText("投递");
 //            return;
-        }else {
+        } else {
             get_job_application_status_for_resume();
             TastyToast.makeText(getApplicationContext(), "Loading……", TastyToast.LENGTH_SHORT, TastyToast.INFO);
         }
@@ -83,7 +81,7 @@ public class JobinfoActivity extends AppCompatActivity{
         btn_toudi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(is_login()==false){
+                if (is_login() == false) {
                     return;
                 }
                 get_job_application_status();
@@ -96,7 +94,7 @@ public class JobinfoActivity extends AppCompatActivity{
 
             @Override
             public void run() {
-                try{
+                try {
                     final Job job_detail = cs.get_jobdetails(job);
 
 //                    Looper.myQueue();
@@ -104,15 +102,15 @@ public class JobinfoActivity extends AppCompatActivity{
                         @Override
                         public void run() {
                             tv_jobname.setText(job_detail.getJobName());
-                            tv_salary.setText(""+job_detail.getPayMin()+"-"+job_detail.getPayMax()+"RMB");
-                            tv_degree_place.setText(""+job_detail.getDegree()+"|"+job_detail.getWorkPlace());
-                            tv_enddate.setText("截止日期："+job_detail.getEndDate());
+                            tv_salary.setText("" + job_detail.getPayMin() + "-" + job_detail.getPayMax() + "RMB");
+                            tv_degree_place.setText("" + job_detail.getDegree() + "|" + job_detail.getWorkPlace());
+                            tv_enddate.setText("截止日期：" + job_detail.getEndDate());
                             tv_job_description.setText(job_detail.getJobDescript());
                             tv_job_request.setText(job_detail.getJobRequest());
                         }
                     });
 
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -122,26 +120,27 @@ public class JobinfoActivity extends AppCompatActivity{
         actionBar.hide();
     }
 
-    public void get_job_application_status(){
+    public void get_job_application_status() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
 //                        String s = "{\"uid\":"+user.getUid()+",\"jid\":"+job.getId_job()+"}";
-                try{
-                    final String result = cs.post_toudi(user.getUid(),job.getId_job());
+                try {
+                    final String result = cs.post_toudi(user.getUid(), job.getId_job());
                     Gson gson = new Gson();
-                    aw = gson.fromJson(result,ApplicationWrapper.class);
+                    aw = gson.fromJson(result, ApplicationWrapper.class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
 
-                            if(aw.getStatus().equals("error")){
+                            if (aw.getStatus().equals("error")) {
 
                                 TastyToast.makeText(getApplicationContext(), "您已投递，请勿重复投递", TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
                                 btn_toudi.setText("已完成投递");
+                                btn_toudi.setEnabled(false);
                                 return;
-                            }else{
+                            } else {
 //                                        if(aw.getResult().isDeliver_resume()==true) {
 //                                            TastyToast.makeText(getApplicationContext(), "您已投递，请勿重复投递", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
 ////                                        }else{
@@ -149,28 +148,30 @@ public class JobinfoActivity extends AppCompatActivity{
 //                                            TastyToast.makeText(getApplicationContext(), "投递成功", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
 //
 //                                        }
-                                if(aw.getResult().isHave_resume()==false){
+                                if (aw.getResult().isHave_resume() == false) {
                                     TastyToast.makeText(getApplicationContext(), "您还没有创建简历哦，请前去完善简历", TastyToast.LENGTH_SHORT, TastyToast.INFO).show();
-                                    Intent intent1 = new Intent(getBaseContext(),Resume_Warehouse_Activity.class);
+                                    Intent intent1 = new Intent(getBaseContext(), Resume_Warehouse_Activity.class);
                                     startActivity(intent1);
 //                                    finish();
                                     return;
 //                                                btn_toudi.setText("已投递");
                                 }
-                                if(aw.getResult().isNeed_interview()==false){
+                                if (aw.getResult().isNeed_interview() == false) {
                                     TastyToast.makeText(getApplicationContext(), "您已投递成功，该企业无需面试", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
                                     btn_toudi.setText("已完成投递");
+                                    btn_toudi.setEnabled(false);
                                     return;
-                                }else{
-                                    if(aw.getResult().isIs_interview()==true){
+                                } else {
+                                    if (aw.getResult().isIs_interview() == true) {
                                         TastyToast.makeText(getApplicationContext(), "投递成功，您的简历与面试报告均发送至企业", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
                                         btn_toudi.setText("已完成投递");
-                                    }else {
+                                        btn_toudi.setEnabled(false);
+                                    } else {
                                         TastyToast.makeText(getApplicationContext(), "该企业要求面试，请先参与面试", TastyToast.LENGTH_SHORT, TastyToast.INFO).show();
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("iid",1);
-                                        Intent intent = new Intent(getBaseContext(),WelcomeInterviewActivity.class);
-                                        intent.putExtra("iid",bundle);
+                                        bundle.putInt("iid", 1);
+                                        Intent intent = new Intent(getBaseContext(), WelcomeInterviewActivity.class);
+                                        intent.putExtra("iid", bundle);
                                         startActivity(intent);
 //                                        finish();
                                         return;
@@ -181,18 +182,20 @@ public class JobinfoActivity extends AppCompatActivity{
                         }
 //                                }
                     });
-                }catch (Exception ex){ex.printStackTrace();}
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         thread.start();
     }
 
-    public boolean is_login(){
-        user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
-        if(user == null){
+    public boolean is_login() {
+        user = (User) ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
+        if (user == null) {
 //                    Toast.makeText(getBaseContext(),"您尚未登录，请进行登录",Toast.LENGTH_SHORT).show();
             TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录……", TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
-            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
             return false;
@@ -201,30 +204,31 @@ public class JobinfoActivity extends AppCompatActivity{
     }
 
 
-    public void get_job_application_status_for_resume(){
+    public void get_job_application_status_for_resume() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
 //                        String s = "{\"uid\":"+user.getUid()+",\"jid\":"+job.getId_job()+"}";
-                try{
-                    final String result = cs.check_toudi(user.getUid(),job.getId_job());
+                try {
+                    final String result = cs.check_toudi(user.getUid(), job.getId_job());
                     Gson gson = new Gson();
-                    aw = gson.fromJson(result,ApplicationWrapper.class);
+                    aw = gson.fromJson(result, ApplicationWrapper.class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(aw == null){
+                            if (aw == null) {
 
                                 return;
                             }
-                            if(aw.getStatus().equals("error")){
+                            if (aw.getStatus().equals("error")) {
 
                                 btn_toudi.setText("已完成投递");
+                                btn_toudi.setEnabled(false);
                                 return;
 //                                TastyToast.makeText(getApplicationContext(), "当前投递人数过多，投递失败，请稍后再试", TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
-                            }else{
-                                if(aw.getResult().isDeliver_resume()==true) {
+                            } else {
+                                if (aw.getResult().isDeliver_resume() == true) {
 //                                    TastyToast.makeText(getApplicationContext(), "您已投递，请勿重复投递", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
                                     //
                                     if (aw.getResult().isHave_resume() == false) {
@@ -238,13 +242,15 @@ public class JobinfoActivity extends AppCompatActivity{
                                     }
                                     if (aw.getResult().isNeed_interview() == false) {
 //                                        TastyToast.makeText(getApplicationContext(), "您已投递成功，该企业无需面试", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
-                                        btn_toudi.setText("投递成功");
+                                        btn_toudi.setText("已完成投递");
+                                        btn_toudi.setEnabled(false);
                                         return;
                                     } else {
                                         if (aw.getResult().isIs_interview() == true) {
 //                                            TastyToast.makeText(getApplicationContext(), "投递成功，您的简历与面试报告均发送至企业", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
 
-                                            btn_toudi.setText("投递成功");
+                                            btn_toudi.setText("已完成投递");
+                                            btn_toudi.setEnabled(false);
                                             return;
                                         } else {
 //                                            TastyToast.makeText(getApplicationContext(), "该企业要求面试，请先参与面试", TastyToast.LENGTH_SHORT, TastyToast.INFO).show();
@@ -264,7 +270,9 @@ public class JobinfoActivity extends AppCompatActivity{
                         }
 //                                }
                     });
-                }catch (Exception ex){ex.printStackTrace();}
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         thread.start();

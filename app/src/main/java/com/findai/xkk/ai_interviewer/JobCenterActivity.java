@@ -1,9 +1,6 @@
 package com.findai.xkk.ai_interviewer;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.findai.xkk.ai_interviewer.Dao.Question_Data_Exe;
-import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
-import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.job_fragment.Job_Index_maintop_Fragment;
@@ -26,28 +19,34 @@ import com.findai.xkk.ai_interviewer.job_fragment.Myinfo_Index_maintop_Fragment;
 import com.findai.xkk.ai_interviewer.job_fragment.Toudi_Index_maintop_Fragment;
 import com.oragee.banners.BannerView;
 
-import java.net.HttpURLConnection;
-import java.util.List;
-
-public class JobCenterActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
+public class JobCenterActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     Fragment CurrentFragment = new Fragment();
+    FragmentManager fm = getSupportFragmentManager();
+    FragmentTransaction ft = fm.beginTransaction();
+    BannerView bannerView;
+    JobList joblist;
+    private Question_Data_Exe question_data_exe;
+    private QuestionList questionList = null;
+    private Job_Index_maintop_Fragment job_index_maintop_fragment;
+    private Myinfo_Index_maintop_Fragment myinfo_index_maintop_fragment;
+    private Toudi_Index_maintop_Fragment toudi_index_maintop_fragment;
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         System.out.println(checkedId);
         ft = fm.beginTransaction();
-        switch (checkedId){
+        switch (checkedId) {
             case R.id.rd_job_center:
-                ft.hide( CurrentFragment);
+                ft.hide(CurrentFragment);
 //                System.out.println("1111111111111");
                 CurrentFragment = job_index_maintop_fragment;
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable("joblist",joblist);
-                if(CurrentFragment == null){
+                if (CurrentFragment == null) {
                     CurrentFragment = new Job_Index_maintop_Fragment();
-                    ft.add(R.id.framelayout_job_maintop,CurrentFragment);
+                    ft.add(R.id.framelayout_job_maintop, CurrentFragment);
 //                    CurrentFragment.setArguments(bundle);
-                }else {
+                } else {
 //                    CurrentFragment.setArguments(bundle);
                     ft.show(CurrentFragment);
                 }
@@ -61,14 +60,14 @@ public class JobCenterActivity extends AppCompatActivity implements RadioGroup.O
 //                break;
 //                if(CurrentFragment!=null){
 //                    System.out.println("2222222222222222222222aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                    ft.hide( CurrentFragment);
+                ft.hide(CurrentFragment);
 //                }
                 CurrentFragment = myinfo_index_maintop_fragment;
-                if(CurrentFragment == null){
+                if (CurrentFragment == null) {
 //                    System.out.println("2222222222222222222222bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                     CurrentFragment = new Myinfo_Index_maintop_Fragment();
-                    ft.add(R.id.framelayout_job_maintop,CurrentFragment);
-                }else {
+                    ft.add(R.id.framelayout_job_maintop, CurrentFragment);
+                } else {
 //                    System.out.println("2222222222222222222222ccccccccccccccccccccccccccccc");
                     ft.show(CurrentFragment);
                 }
@@ -77,32 +76,21 @@ public class JobCenterActivity extends AppCompatActivity implements RadioGroup.O
 //                toudi_index_maintop_fragment = new Toudi_Index_maintop_Fragment();
 //                ft.replace(R.id.framelayout_job_maintop,toudi_index_maintop_fragment);
 //                break;
-                ft.hide( CurrentFragment);
+                ft.hide(CurrentFragment);
                 CurrentFragment = toudi_index_maintop_fragment;
-                if(CurrentFragment == null){
+                if (CurrentFragment == null) {
                     CurrentFragment = new Toudi_Index_maintop_Fragment();
-                    ft.add(R.id.framelayout_job_maintop,CurrentFragment);
-                }else {
+                    ft.add(R.id.framelayout_job_maintop, CurrentFragment);
+                } else {
                     ft.show(CurrentFragment);
                 }
 //                System.out.println("33333333333333333333");
                 break;
         }
 //        ft.addToBackStack(null);
-        ft.commitAllowingStateLoss();
+        ft.commit();
     }
 
-    private Question_Data_Exe question_data_exe;
-    private QuestionList questionList = null;
-    FragmentManager fm = getSupportFragmentManager();
-    FragmentTransaction ft = fm.beginTransaction();
-
-    BannerView bannerView;
-    JobList joblist;
-
-    private Job_Index_maintop_Fragment job_index_maintop_fragment;
-    private Myinfo_Index_maintop_Fragment myinfo_index_maintop_fragment;
-    private Toudi_Index_maintop_Fragment toudi_index_maintop_fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,19 +148,19 @@ public class JobCenterActivity extends AppCompatActivity implements RadioGroup.O
 
 
     }
-    private void showfragment(){
+
+    private void showfragment() {
 //        ft = fm.beginTransaction();
-        try{
+        try {
 
             CurrentFragment = job_index_maintop_fragment = new Job_Index_maintop_Fragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("joblist",(JobList)getIntent().getBundleExtra("joblist").getSerializable("joblist"));
+            bundle.putSerializable("joblist", (JobList) getIntent().getBundleExtra("joblist").getSerializable("joblist"));
             job_index_maintop_fragment.setArguments(bundle);
-            ft.replace(R.id.framelayout_job_maintop,job_index_maintop_fragment);
+            ft.replace(R.id.framelayout_job_maintop, job_index_maintop_fragment);
             ft.commit();
             return;
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
 //            final Commiuncate_Server cs = new Commiuncate_Server();
 ////            Thread thread1 = new Thread(new Runnable() {

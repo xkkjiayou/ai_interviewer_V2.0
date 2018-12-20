@@ -1,18 +1,15 @@
 package com.findai.xkk.ai_interviewer.domain;
 
-import android.widget.Button;
-import android.widget.EditText;
-
 import java.io.Serializable;
 
 public class WorkExperience implements Serializable {
 
 
-    String companyname="";
-    String jobname="";
-    String workyear_start="";
-    String jobdescription="";
-    String workyear_end="";
+    String companyname = "";
+    String jobname = "";
+    String workyear_start = "";
+    String jobdescription = "";
+    String workyear_end = "";
 
 
     public String getCompanyname() {

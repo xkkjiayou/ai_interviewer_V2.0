@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="#ececec"
+    android:orientation="horizontal"
     android:weightSum="12">
+
     <ScrollView
         android:id="@+id/sv_job_lastest"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.oragee.banners.BannerView
                 android:id="@+id/banner_ad"
                 android:layout_width="match_parent"
@@ -22,83 +23,84 @@
 
             </com.oragee.banners.BannerView>
             <!--<ImageView-->
-                <!--android:id="@+id/img_ad1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="212dp"-->
-                <!--android:src="@mipmap/ad1" />-->
+            <!--android:id="@+id/img_ad1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="212dp"-->
+            <!--android:src="@mipmap/ad1" />-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btn_kj_interview"
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="会计面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="会计面试" />
+
                 <Button
                     android:id="@+id/btn_jsj_interview"
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="医疗面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="医疗面试" />
+
                 <Button
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="软件面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="软件面试" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="互联网面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="互联网面试" />
+
                 <Button
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="土木面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="土木面试" />
+
                 <Button
+                    style="@style/job_tiku_btn_css"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="人力资源面试"
-                    style="@style/job_tiku_btn_css"
-                    />
+                    android:text="人力资源面试" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="142dp"
                 android:src="@mipmap/ad2" />
+
             <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="#ffffff"
                 android:orientation="vertical">
 
                 <ListView
                     android:id="@+id/lv_joblist"
-                    android:stackFromBottom="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
+                    android:layout_height="wrap_content"
+                    android:stackFromBottom="false"></ListView>
 
 
             </LinearLayout>
@@ -106,10 +108,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
                 android:layout_marginTop="20dp"
-                android:text="到底啦~"
-                android:gravity="center"/>
+                android:layout_marginBottom="100dp"
+                android:gravity="center"
+                android:text="到底啦~" />
 
         </LinearLayout>
 

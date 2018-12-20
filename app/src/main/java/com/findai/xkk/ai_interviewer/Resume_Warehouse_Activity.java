@@ -7,30 +7,26 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.Utils.ACache;
 import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
 import com.findai.xkk.ai_interviewer.domain.User;
-import com.google.gson.Gson;
 import com.sdsmdg.tastytoast.TastyToast;
 
-public class Resume_Warehouse_Activity extends AppCompatActivity implements View.OnClickListener{
+public class Resume_Warehouse_Activity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout ll_myresume;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo_resume_warehouse_activity);
 
-        User user = (User)ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
-        if(user == null){
+        User user = (User) ACache.get(getBaseContext()).getAsObject(GlobalParams.Para_USER);
+        if (user == null) {
             TastyToast.makeText(getApplicationContext(), "您尚未登录，请进行登录", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
-            Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -57,9 +53,9 @@ public class Resume_Warehouse_Activity extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_myresume:
-                Intent intent = new Intent(getBaseContext(),WriteResumeActivity.class);
+                Intent intent = new Intent(getBaseContext(), WriteResumeActivity.class);
                 startActivity(intent);
         }
     }

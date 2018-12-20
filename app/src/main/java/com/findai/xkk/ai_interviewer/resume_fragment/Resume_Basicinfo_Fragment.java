@@ -16,7 +16,7 @@ import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 
 @SuppressLint("ValidFragment")
-public class Resume_Basicinfo_Fragment extends Fragment{
+public class Resume_Basicinfo_Fragment extends Fragment {
 
     EditText et_birthday;
     EditText et_ideal;
@@ -27,12 +27,12 @@ public class Resume_Basicinfo_Fragment extends Fragment{
     EditText et_name;
     Resume resume = new Resume();
     Button btn_next_resume;
+    ResumeInterface ri;
 
-
-    public Resume_Basicinfo_Fragment(ResumeInterface cb){
+    public Resume_Basicinfo_Fragment(ResumeInterface cb) {
         this.ri = cb;
     }
-    ResumeInterface ri;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class Resume_Basicinfo_Fragment extends Fragment{
         Bundle bundle = getArguments();
 
 //        System.out.println(bundle.);
-        resume = (Resume)bundle.getSerializable("resume");
+        resume = (Resume) bundle.getSerializable("resume");
         et_birthday = view.findViewById(R.id.et_birthday);
         et_ideal = view.findViewById(R.id.et_ideal);
         et_email = view.findViewById(R.id.et_email);
@@ -76,15 +76,15 @@ public class Resume_Basicinfo_Fragment extends Fragment{
         String set_gender = et_gender.getText().toString();
         String set_nativeplace = et_nativeplace.getText().toString();
         String set_name = et_name.getText().toString();
-        String[] ss = new String[]{set_birthday,set_ideal,set_email,set_tele,set_gender,set_nativeplace,set_name};
-        if(set_birthday==null||set_birthday.equals("")
-                ||set_ideal==null||set_ideal.equals("")
-                ||set_email==null||set_email.equals("")
-                ||set_tele==null||set_tele.equals("")
-                ||set_gender==null||set_gender.equals("")
-                ||set_nativeplace==null||set_nativeplace.equals("")
-                ||set_name==null||set_name.equals("")){
-            Toast.makeText(getContext(),"请填写内容哦",Toast.LENGTH_LONG).show();
+        String[] ss = new String[]{set_birthday, set_ideal, set_email, set_tele, set_gender, set_nativeplace, set_name};
+        if (set_birthday == null || set_birthday.equals("")
+                || set_ideal == null || set_ideal.equals("")
+                || set_email == null || set_email.equals("")
+                || set_tele == null || set_tele.equals("")
+                || set_gender == null || set_gender.equals("")
+                || set_nativeplace == null || set_nativeplace.equals("")
+                || set_name == null || set_name.equals("")) {
+            Toast.makeText(getContext(), "请填写内容哦", Toast.LENGTH_LONG).show();
             return;
         }
         ri.resume_basicinfo_interface_impl(ss);

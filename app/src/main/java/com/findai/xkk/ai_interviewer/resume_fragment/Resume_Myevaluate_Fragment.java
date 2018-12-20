@@ -16,17 +16,22 @@ import com.findai.xkk.ai_interviewer.R;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 
 @SuppressLint("ValidFragment")
-public class Resume_Myevaluate_Fragment extends Fragment implements View.OnClickListener{
+public class Resume_Myevaluate_Fragment extends Fragment implements View.OnClickListener {
     EditText et_myevaluate;
     Button btn_submit_resume;
     Resume resume = new Resume();
     ResumeInterface ri;
+
+    public Resume_Myevaluate_Fragment(ResumeInterface cb) {
+        this.ri = cb;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_myevaluate_resume_fragment, container, false);
         Bundle bundle = getArguments();
-        resume = (Resume)bundle.getSerializable("resume");
+        resume = (Resume) bundle.getSerializable("resume");
         et_myevaluate = view.findViewById(R.id.et_evaluation);
         btn_submit_resume = view.findViewById(R.id.btn_submit_resume);
         btn_submit_resume.setOnClickListener(this);
@@ -34,15 +39,11 @@ public class Resume_Myevaluate_Fragment extends Fragment implements View.OnClick
         return view;
     }
 
-    public Resume_Myevaluate_Fragment(ResumeInterface cb){
-        this.ri = cb;
-    }
-
     @Override
     public void onClick(View v) {
         String s = et_myevaluate.getText().toString();
-        if(s==null||s.equals("")){
-            Toast.makeText(getContext(),"请填写内容哦",Toast.LENGTH_LONG).show();
+        if (s == null || s.equals("")) {
+            Toast.makeText(getContext(), "请填写内容哦", Toast.LENGTH_LONG).show();
             return;
         }
         ri.resume_evalution_interface_impl(s);

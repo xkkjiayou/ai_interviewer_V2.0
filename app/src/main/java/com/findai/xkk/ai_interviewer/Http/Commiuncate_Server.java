@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.findai.xkk.ai_interviewer.Utils.BitmapUtil;
+import com.findai.xkk.ai_interviewer.domain.ApplicationRecordWrapper;
 import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
 import com.findai.xkk.ai_interviewer.domain.JobWrapper;
@@ -16,7 +17,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,19 +31,8 @@ import okhttp3.Response;
 
 public class Commiuncate_Server {
 
-    Gson gson = new Gson();
-    String get_question_url = "http://115.159.59.188:5000/get_question_by_industry_id?iid=";
-    String post_answer_url = "http://115.159.59.188:5000/post_answer";
-    String post_login_url = "http://115.159.59.188:5000/login";
-    String post_register_url = "http://115.159.59.188:5000/register";
-    String post_resume_url = "http://115.159.59.188:5000/add_resume";
-    String get_resume_by_uid_url = "http://115.159.59.188:5000/get_resume_by_uid?uid=";
-    String get_jobdetails_by_jid_url = "http://115.159.59.188:5000/get_jobdetails?jobid=";
-    String get_lastest_joblist_url= "http://115.159.59.188:5000/get_joblist?topk=";
-    String get_index_load_bitmap_url = "http://115.159.59.188:5000/get_loading_image";
-    String post_toudi_url = "http://115.159.59.188:5000/post_job_application";
-    String check_toudi_url = "http://115.159.59.188:5000/check_job_application";
     static OkHttpClient client;
+
     static {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -54,6 +43,20 @@ public class Commiuncate_Server {
 
         client = builder.build();
     }
+
+    Gson gson = new Gson();
+    String get_question_url = "http://115.159.59.188:5000/get_question_by_industry_id?iid=";
+    String post_answer_url = "http://115.159.59.188:5000/post_answer";
+    String post_login_url = "http://115.159.59.188:5000/login";
+    String post_register_url = "http://115.159.59.188:5000/register";
+    String post_resume_url = "http://115.159.59.188:5000/add_resume";
+    String get_resume_by_uid_url = "http://115.159.59.188:5000/get_resume_by_uid?uid=";
+    String get_jobdetails_by_jid_url = "http://115.159.59.188:5000/get_jobdetails?jobid=";
+    String get_lastest_joblist_url = "http://115.159.59.188:5000/get_joblist?topk=";
+    String get_index_load_bitmap_url = "http://115.159.59.188:5000/get_loading_image";
+    String post_toudi_url = "http://115.159.59.188:5000/post_job_application";
+    String check_toudi_url = "http://115.159.59.188:5000/check_job_application";
+    String get_applicationrecordlist_by_uid_url = "http://115.159.59.188:5000/get_application_record_list_by_uid?uid=";
 
     public QuestionList get_question_by_iid(int qid) throws Exception {
 //        OkHttpClient client = new OkHttpClient();
@@ -138,11 +141,11 @@ public class Commiuncate_Server {
 
     }
 
-    public String post_login(User user) throws Exception{
+    public String post_login(User user) throws Exception {
 
 //        OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("user",gson.toJson(user))
+                .add("user", gson.toJson(user))
 //                .add("password",user.getPassword())
                 .build();
         Request request = new Request.Builder().url(post_login_url).post(requestBody).build();
@@ -150,18 +153,18 @@ public class Commiuncate_Server {
         try {
             response = client.newCall(request).execute();
             String jsonString = response.body().string();
-            Log.i("登录",jsonString);
+            Log.i("登录", jsonString);
             return jsonString;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return "";
         }
     }
 
-    public String post_register(User user) throws Exception{
+    public String post_register(User user) throws Exception {
 //        OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("user",gson.toJson(user))
+                .add("user", gson.toJson(user))
 //                .add("password",user.getPassword())
                 .build();
         Request request = new Request.Builder().url(post_register_url).post(requestBody).build();
@@ -169,20 +172,20 @@ public class Commiuncate_Server {
         try {
             response = client.newCall(request).execute();
             String jsonString = response.body().string();
-            Log.i("注册",jsonString);
+            Log.i("注册", jsonString);
             return jsonString;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return "";
         }
     }
 
 
-    public String post_resume(Resume resume) throws Exception{
+    public String post_resume(Resume resume) throws Exception {
 //        OkHttpClient client = new OkHttpClient();
-        System.out.println("上传的简历："+gson.toJson(resume));
+        System.out.println("上传的简历：" + gson.toJson(resume));
         RequestBody requestBody = new FormBody.Builder()
-                .add("resume",gson.toJson(resume))
+                .add("resume", gson.toJson(resume))
 //                .add("password",user.getPassword())
                 .build();
         Request request = new Request.Builder().url(post_resume_url).post(requestBody).build();
@@ -190,16 +193,16 @@ public class Commiuncate_Server {
         try {
             response = client.newCall(request).execute();
             String jsonString = response.body().string();
-            Log.i("注册",jsonString);
+            Log.i("注册", jsonString);
             return jsonString;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return "";
         }
     }
 
 
-    public Resume get_resume_by_uid(User user) throws Exception{
+    public Resume get_resume_by_uid(User user) throws Exception {
 
 //        OkHttpClient client = new OkHttpClient();
         String qurl = get_resume_by_uid_url + user.getUid();
@@ -210,12 +213,11 @@ public class Commiuncate_Server {
         if (response.isSuccessful()) {
             String str = response.body().string();
 //            System.out.println(str);
-            ResumeWrapper rw  = gson.fromJson(str,ResumeWrapper.class);
-            if(rw.getStatus().equals("success")){
+            ResumeWrapper rw = gson.fromJson(str, ResumeWrapper.class);
+            if (rw.getStatus().equals("success")) {
                 resume = rw.getResume();
                 resume.setHasResume(true);
-            }else
-            {
+            } else {
                 resume = new Resume();
                 resume.setHasResume(false);
             }
@@ -229,8 +231,7 @@ public class Commiuncate_Server {
     }
 
 
-
-    public JobList get_joblist(int topk) throws Exception{
+    public JobList get_joblist(int topk) throws Exception {
 
         String qurl = get_lastest_joblist_url + topk;
         System.out.println(qurl);
@@ -241,9 +242,9 @@ public class Commiuncate_Server {
         if (response.isSuccessful()) {
             String str = response.body().string();
 //            System.out.println(str);
-            JobList rw  = gson.fromJson(str,JobList.class);
-            if(rw.getStatus().equals("success")){
-                for (Job j : rw.getJobList()){
+            JobList rw = gson.fromJson(str, JobList.class);
+            if (rw.getStatus().equals("success")) {
+                for (Job j : rw.getJobList()) {
 
                     j.setBitmap(BitmapUtil.Bitmap2Bytes(get_bitmap_from_url(j.getCompanyLogo())));
                 }
@@ -254,7 +255,7 @@ public class Commiuncate_Server {
         return new JobList();
     }
 
-    public Job get_jobdetails(Job job) throws Exception{
+    public Job get_jobdetails(Job job) throws Exception {
 
 //        OkHttpClient client = new OkHttpClient();
         String qurl = get_jobdetails_by_jid_url + job.getId_job();
@@ -265,8 +266,8 @@ public class Commiuncate_Server {
         if (response.isSuccessful()) {
             String str = response.body().string();
             System.out.println(str);
-            JobWrapper rw  = gson.fromJson(str,JobWrapper.class);
-            if(rw.getStatus().equals("success")){
+            JobWrapper rw = gson.fromJson(str, JobWrapper.class);
+            if (rw.getStatus().equals("success")) {
                 job = rw.getJob_details();
             }
         }
@@ -274,7 +275,7 @@ public class Commiuncate_Server {
         return job;
     }
 
-    public Bitmap get_bitmap_from_url(String url) throws Exception{
+    public Bitmap get_bitmap_from_url(String url) throws Exception {
 //        OkHttpClient client = new OkHttpClient();
         Request imgrequest = new Request.Builder()
                 .url(url)
@@ -287,7 +288,7 @@ public class Commiuncate_Server {
     }
 
 
-    public Bitmap get_index_load_bitmap_url() throws Exception{
+    public Bitmap get_index_load_bitmap_url() throws Exception {
 
 //        OkHttpClient client = new OkHttpClient();
         String qurl = get_index_load_bitmap_url;
@@ -309,9 +310,7 @@ public class Commiuncate_Server {
     }
 
 
-
-
-    public String post_toudi(int uid,int jid) throws Exception {
+    public String post_toudi(int uid, int jid) throws Exception {
 //        OkHttpClient.Builder builder = new OkHttpClient.Builder();
 //
 //        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
@@ -319,7 +318,7 @@ public class Commiuncate_Server {
 //                .readTimeout(1, TimeUnit.MINUTES); // read timeout
 //
 //        OkHttpClient client = builder.build();
-        String qurl = post_toudi_url+"?uid="+uid+"&jid="+jid+"";
+        String qurl = post_toudi_url + "?uid=" + uid + "&jid=" + jid + "";
         System.out.println(qurl);
 
         Request request = new Request.Builder().url(qurl).build();
@@ -342,8 +341,7 @@ public class Commiuncate_Server {
     }
 
 
-
-    public String check_toudi(int uid,int jid) throws Exception {
+    public String check_toudi(int uid, int jid) throws Exception {
 //        OkHttpClient.Builder builder = new OkHttpClient.Builder();
 //
 //        builder.connectTimeout(1, TimeUnit.MINUTES) // connect timeout
@@ -351,7 +349,7 @@ public class Commiuncate_Server {
 //                .readTimeout(1, TimeUnit.MINUTES); // read timeout
 //
 //        OkHttpClient client = builder.build();
-        String qurl =check_toudi_url+"?uid="+uid+"&jid="+jid+"";
+        String qurl = check_toudi_url + "?uid=" + uid + "&jid=" + jid + "";
         System.out.println(qurl);
 
         Request request = new Request.Builder().url(qurl).build();
@@ -369,8 +367,25 @@ public class Commiuncate_Server {
             ex.printStackTrace();
             return "";
         }
+    }
 
+    public ApplicationRecordWrapper get_applicationrecordlist_by_uid(int uid) {
+        String qurl = get_applicationrecordlist_by_uid_url + uid;
+        Request request = new Request.Builder().url(qurl).build();
+        System.out.println(qurl);
+        ApplicationRecordWrapper arw = new ApplicationRecordWrapper();
+        try {
+            Response response = client.newCall(request).execute();
+            ;
+            String jsonString = response.body().string();
+            System.out.println(jsonString);
+            System.out.println("=============3==============");
+            arw = gson.fromJson(jsonString, ApplicationRecordWrapper.class);
 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return arw;
     }
 
 }

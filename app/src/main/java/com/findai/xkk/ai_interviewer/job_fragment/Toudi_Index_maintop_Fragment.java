@@ -1,6 +1,7 @@
 package com.findai.xkk.ai_interviewer.job_fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,69 +9,140 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
+import com.findai.xkk.ai_interviewer.JobinfoActivity;
 import com.findai.xkk.ai_interviewer.R;
+import com.findai.xkk.ai_interviewer.Utils.ACache;
+import com.findai.xkk.ai_interviewer.Utils.BitmapUtil;
+import com.findai.xkk.ai_interviewer.Utils.GlobalParams;
+import com.findai.xkk.ai_interviewer.domain.ApplicationRecord;
+import com.findai.xkk.ai_interviewer.domain.ApplicationRecordWrapper;
+import com.findai.xkk.ai_interviewer.domain.Job;
+import com.findai.xkk.ai_interviewer.domain.User;
+import com.sdsmdg.tastytoast.TastyToast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressLint("ValidFragment")
-public class Toudi_Index_maintop_Fragment extends Fragment{
-//
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.btn_kj_interview:
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("iid",1);
-//                Intent intent = new Intent(getContext(),WelcomeIndexActivity.class);
-//                intent.putExtra("iid",bundle);
-//                startActivity(intent);
-//        }
-//    }
-
-//    callbackQuestion_Choose_Fragment callbackQuestion_choose_fragment = null;
-//    private Button btn_kj;
-//    public Myinfo_Index_maintop_Fragment() {
-//    }
-//
-//    public Myinfo_Index_maintop_Fragment(callbackQuestion_Choose_Fragment callbackQuestionChooseFragment) {
-//        this.callbackQuestion_choose_fragment = callbackQuestionChooseFragment;
-//
-//    }
+public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterView.OnItemClickListener {
+    Commiuncate_Server cs = new Commiuncate_Server();
+    LinearLayout ll_toudi;
+    ApplicationRecordWrapper arw;
+    User user;
+    private List<Map<String, Object>> list;
+    private ListView lv_toudi;
+    private List<Job> joblist = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.toudixiang_fragment, container, false);
-//        RadioGroup radioGroup = view.findViewById(R.id.tv_question_radio);
-//        Bundle bundle = getArguments();
-//        Question q = (Question) bundle.getSerializable("question");
-//        TextView qtitle = (TextView) view.findViewById(R.id.tv_question_title);
-//        qtitle.setText(q.getTitle());
-//        int i = 0;
-//        for (String qchoose_item : q.getQuestion_choose_items()) {
-//            RadioButton rb = new RadioButton(getContext());
-//            rb.setId(i);
-////            rb.setb
-//            rb.setText(qchoose_item);
-//            i++;
-//            radioGroup.addView(rb);
-//        }
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-////                System.out.println("------------------");
-////                String answer = ((RadioButton)group.getChildAt(checkedId)).getText().toString();
-////                System.out.println(answer);
-//                callbackQuestion_choose_fragment.get_question_answer(checkedId);
-//            }
-//        });
-//        btn_kj = view.findViewById(R.id.btn_kj_interview);
-//        btn_kj.setOnClickListener(this);
+        lv_toudi = view.findViewById(R.id.lv_toudi);
+        ll_toudi = view.findViewById(R.id.ll_toudi);
+        ll_toudi.setVisibility(View.GONE);
+        lv_toudi.setOnItemClickListener(this);
+        user = (User) ACache.get(getContext()).getAsObject(GlobalParams.Para_USER);
+        if (user == null) {
+            TastyToast.makeText(getContext(), "您尚未登录，无法获取哦", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            startActivity(intent);
+            return view;
+        } else {
+
+            get_list(user.getUid());
+
+
+        }
+
+
         return view;
+
 
     }
 
-//    public interface callbackQuestion_Choose_Fragment {
-//        public int get_question_answer(int answer);
-//    }
+    public void get_list(final int uid) {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    arw = cs.get_applicationrecordlist_by_uid(uid);
+                    if (arw.getStatus().equals("error")) {
+                        return;
+                    } else {
+                        for (ApplicationRecord a : arw.getApplication_record_list()) {
+                            Job j = new Job();
+                            j.setId_job(a.getJobid());
+                            j = cs.get_jobdetails(j);
+                            j.setBitmap(BitmapUtil.Bitmap2Bytes(cs.get_bitmap_from_url(j.getCompanyLogo())));
+                            String Application_status = "已完成投递";
+                            if (a.isNeed_interview() == false)
+                                Application_status = "已完成投递";
+                            else if (a.isIs_interview() == false)
+                                Application_status = "尚未完成面试";
+//                            Application_status
+                            j.setApplication_status(Application_status);
+                            joblist.add(j);
+                            list = getData(joblist);
+                        }
+                    }
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ll_toudi.setVisibility(View.VISIBLE);
+                            lv_toudi.setAdapter(new JobListView_Adapter(getContext(), list));
+                        }
+                    });
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        }).start();
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final int p = position;
+        Bundle bundle = new Bundle();
+//        joblist.get(position).setBitmap(null);
+        bundle.putSerializable("job", joblist.get(position));
+
+        Intent intent = new Intent(getContext(), JobinfoActivity.class);
+        intent.putExtra("job", bundle);
+        startActivity(intent);
+
+    }
+
+    public List<Map<String, Object>> getData(List<Job> joblist) {
+
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        for (Job job : joblist) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("image", job.getBitmap());
+            map.put("jobname", job.getJobName());
+            map.put("jobdesc", job.getApplication_status());
+            list.add(map);
+        }
+        System.out.println(list.size());
+//        Collections.shuffle(list);
+        return list;
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (user != null)
+            get_list(user.getUid());
+    }
 }

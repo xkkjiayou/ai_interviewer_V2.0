@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.findai.xkk.ai_interviewer.R;
-import com.findai.xkk.ai_interviewer.domain.EducationExperience;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.WorkExperience;
 
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
-public class Resume_Workexperience_Fragment extends Fragment{
+public class Resume_Workexperience_Fragment extends Fragment {
 
 
     Button btn_next_resume;
@@ -34,15 +33,16 @@ public class Resume_Workexperience_Fragment extends Fragment{
     ResumeInterface ri;
 
 
-    public Resume_Workexperience_Fragment(ResumeInterface cb){
+    public Resume_Workexperience_Fragment(ResumeInterface cb) {
         this.ri = cb;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_workexperience_resume_fragment, container, false);
         Bundle bundle = getArguments();
-        resume = (Resume)bundle.getSerializable("resume");
+        resume = (Resume) bundle.getSerializable("resume");
 
 
         et_companyname = view.findViewById(R.id.et_companyname);
@@ -114,13 +114,13 @@ public class Resume_Workexperience_Fragment extends Fragment{
 
 
 //        String[] ss = new String[]{set_companyname,set_jobname,set_workyear,set_jobdescription};
-        if(set_companyname==null||set_companyname.equals("")
-                ||set_jobname==null||set_jobname.equals("")
-                ||set_workyear_start==null||set_workyear_start.equals("")
-                ||set_workyear_end==null||set_workyear_end.equals("")
-                ||set_jobdescription==null||set_jobdescription.equals("")
-                ){
-            Toast.makeText(getContext(),"请填写内容哦",Toast.LENGTH_LONG).show();
+        if (set_companyname == null || set_companyname.equals("")
+                || set_jobname == null || set_jobname.equals("")
+                || set_workyear_start == null || set_workyear_start.equals("")
+                || set_workyear_end == null || set_workyear_end.equals("")
+                || set_jobdescription == null || set_jobdescription.equals("")
+                ) {
+            Toast.makeText(getContext(), "请填写内容哦", Toast.LENGTH_LONG).show();
             return;
         }
         ri.resume_workexperience_interface_impl(list);
