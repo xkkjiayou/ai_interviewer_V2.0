@@ -19,8 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="投递记录" />
+            android:text="职场中心" />
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/ll_toudi"
@@ -29,8 +30,23 @@
         android:layout_marginTop="20dp"
         android:background="#ffffff"
         android:gravity="center"
+        android:orientation="vertical"
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/img_toudi"
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:background="#fafcfc"
+            android:src="@mipmap/common_loading" />
+        <TextView
+            android:id="@+id/tv_toudi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:text="快去寻找心仪的职位进行投递吧~"
+            android:paddingBottom="20dp"/>
 
         <ListView
             android:id="@+id/lv_toudi"

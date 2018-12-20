@@ -15,6 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <com.oragee.banners.BannerView
                 android:id="@+id/banner_ad"
@@ -22,6 +25,37 @@
                 android:layout_height="212dp">
 
             </com.oragee.banners.BannerView>
+
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/et_searchcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="12"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#88FFFFFF"
+                    android:hint="让职场更懂你(我想在上海做软件开发)"
+                    android:paddingLeft="10dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp" />
+
+                <Button
+                    android:id="@+id/btn_job_search"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@mipmap/search"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+            </RelativeLayout>
             <!--<ImageView-->
             <!--android:id="@+id/img_ad1"-->
             <!--android:layout_width="match_parent"-->

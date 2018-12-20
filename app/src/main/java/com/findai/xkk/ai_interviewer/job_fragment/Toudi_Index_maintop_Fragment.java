@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.JobinfoActivity;
@@ -30,14 +31,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pl.droidsonroids.gif.GifImageView;
+
 @SuppressLint("ValidFragment")
 public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterView.OnItemClickListener {
     Commiuncate_Server cs = new Commiuncate_Server();
     LinearLayout ll_toudi;
+    TextView tv_toudi;
+    private ListView lv_toudi;
+    GifImageView gifImageView;
     ApplicationRecordWrapper arw;
     User user;
     private List<Map<String, Object>> list;
-    private ListView lv_toudi;
     private List<Job> joblist = new ArrayList<>();
 
     @Nullable
@@ -46,8 +51,11 @@ public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterVie
         View view = inflater.inflate(R.layout.toudixiang_fragment, container, false);
         lv_toudi = view.findViewById(R.id.lv_toudi);
         ll_toudi = view.findViewById(R.id.ll_toudi);
-        ll_toudi.setVisibility(View.GONE);
+        tv_toudi = view.findViewById(R.id.tv_toudi);
+        gifImageView = view.findViewById(R.id.img_toudi);
+//        ll_toudi.setVisibility(View.GONE);
         lv_toudi.setOnItemClickListener(this);
+        tv_toudi.setText("加载中~");
         user = (User) ACache.get(getContext()).getAsObject(GlobalParams.Para_USER);
         if (user == null) {
             TastyToast.makeText(getContext(), "您尚未登录，无法获取哦", TastyToast.LENGTH_LONG, TastyToast.ERROR).show();
@@ -55,16 +63,9 @@ public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterVie
 //            startActivity(intent);
             return view;
         } else {
-
             get_list(user.getUid());
-
-
         }
-
-
         return view;
-
-
     }
 
     public void get_list(final int uid) {
@@ -78,6 +79,11 @@ public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterVie
                     if (arw.getStatus().equals("error")) {
                         return;
                     } else {
+                        if(arw.getApplication_record_list().size()==0){
+                            tv_toudi.setText("海量职位等你投递~");
+                            gifImageView.setVisibility(View.GONE);
+                            return;
+                        }
                         for (ApplicationRecord a : arw.getApplication_record_list()) {
                             Job j = new Job();
                             j.setId_job(a.getJobid());
@@ -98,8 +104,10 @@ public class Toudi_Index_maintop_Fragment extends Fragment implements AdapterVie
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ll_toudi.setVisibility(View.VISIBLE);
+//                            ll_toudi.setVisibility(View.VISIBLE);
                             lv_toudi.setAdapter(new JobListView_Adapter(getContext(), list));
+                            gifImageView.setVisibility(View.GONE);
+                            tv_toudi.setVisibility(View.GONE);
                         }
                     });
                 } catch (Exception ex) {

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,9 +20,11 @@ import android.widget.ScrollView;
 import com.findai.xkk.ai_interviewer.Http.Commiuncate_Server;
 import com.findai.xkk.ai_interviewer.JobinfoActivity;
 import com.findai.xkk.ai_interviewer.R;
+import com.findai.xkk.ai_interviewer.SearchResultActivity;
 import com.findai.xkk.ai_interviewer.WelcomeInterviewActivity;
 import com.findai.xkk.ai_interviewer.domain.Job;
 import com.findai.xkk.ai_interviewer.domain.JobList;
+import com.findai.xkk.ai_interviewer.domain.Search;
 import com.oragee.banners.BannerView;
 
 import java.util.ArrayList;
@@ -33,13 +36,15 @@ import java.util.Map;
 public class Job_Index_maintop_Fragment extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
     final Commiuncate_Server cs = new Commiuncate_Server();
     BannerView bannerView;
-
+    Button btn_search;
+    EditText et_content;
     callbackQuestion_Choose_Fragment callbackQuestion_choose_fragment = null;
     boolean job_loaded_flag = false;
     private Button btn_kj;
     private List<Job> joblist = new ArrayList<>();
     private LinearLayout ll_job;
     private ListView lv;
+    String content;
     private List<Map<String, Object>> data;
     private int[] imgs = {R.mipmap.ad4, R.mipmap.ad6, R.mipmap.ad8, R.mipmap.ad1, R.mipmap.ad3};
     private List<View> viewList;
@@ -77,6 +82,24 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
                 intent.putExtra("iid", bundle);
                 startActivity(intent);
                 break;
+            case R.id.btn_job_search:
+                content = et_content.getText().toString();
+                if(content!=null && !content.equals("")){
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Search s = cs.get_search_result(content);
+                            s.getJobidlist();
+                            Bundle bundle1 = new Bundle();
+                            Intent inten1;
+                            bundle1.putSerializable("jobidlist", s);
+                            inten1 = new Intent(getContext(), SearchResultActivity.class);
+                            inten1.putExtra("jobidlist", bundle1);
+                            startActivity(inten1);
+                        }
+                    }).start();
+                }
 //            case R.id.ll_job:
 //                bundle = new Bundle();
 //                bundle.putInt("jid",1);
@@ -92,6 +115,9 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.job_center_maintop_activity, container, false);
         lv = view.findViewById(R.id.lv_joblist);
+        btn_search = view.findViewById(R.id.btn_job_search);
+        btn_search.setOnClickListener(this);
+        et_content = view.findViewById(R.id.et_searchcontent);
         Bundle bundle = getArguments();
         joblist = ((JobList) bundle.getSerializable("joblist")).getJobList();
         data = getData();

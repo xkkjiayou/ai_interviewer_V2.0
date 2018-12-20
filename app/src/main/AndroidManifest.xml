@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeIndexActivity">
+        <activity android:name=".WelcomeIndexActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,6 +29,7 @@
         <activity android:name=".Resume_Warehouse_Activity"></activity>
         <activity android:name=".JobinfoActivity"></activity>
         <activity android:name=".WriteResumeActivity"></activity>
+        <activity android:name=".SearchResultActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

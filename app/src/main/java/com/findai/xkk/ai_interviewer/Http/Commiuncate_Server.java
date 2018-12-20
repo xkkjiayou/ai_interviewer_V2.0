@@ -12,6 +12,7 @@ import com.findai.xkk.ai_interviewer.domain.JobWrapper;
 import com.findai.xkk.ai_interviewer.domain.QuestionList;
 import com.findai.xkk.ai_interviewer.domain.Resume;
 import com.findai.xkk.ai_interviewer.domain.ResumeWrapper;
+import com.findai.xkk.ai_interviewer.domain.Search;
 import com.findai.xkk.ai_interviewer.domain.User;
 import com.google.gson.Gson;
 
@@ -57,7 +58,7 @@ public class Commiuncate_Server {
     String post_toudi_url = "http://115.159.59.188:5000/post_job_application";
     String check_toudi_url = "http://115.159.59.188:5000/check_job_application";
     String get_applicationrecordlist_by_uid_url = "http://115.159.59.188:5000/get_application_record_list_by_uid?uid=";
-
+    String search_url = "http://findai.wang:9000/get_search_result/?searchcontent=";
     public QuestionList get_question_by_iid(int qid) throws Exception {
 //        OkHttpClient client = new OkHttpClient();
         String qurl = get_question_url + qid;
@@ -386,6 +387,26 @@ public class Commiuncate_Server {
             ex.printStackTrace();
         }
         return arw;
+    }
+
+
+    public Search get_search_result(String  content) {
+        String qurl = search_url + content;
+        Request request = new Request.Builder().url(qurl).build();
+        System.out.println(qurl);
+        Search s = new Search();
+        try {
+            Response response = client.newCall(request).execute();
+
+            String jsonString = response.body().string();
+            System.out.println(jsonString);
+            System.out.println("=============3==============");
+            s = gson.fromJson(jsonString, Search.class);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return s;
     }
 
 }
