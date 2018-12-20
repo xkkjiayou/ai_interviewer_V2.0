@@ -39,7 +39,7 @@
                     android:paddingLeft="10dp"
                     android:inputType="text"
                     android:maxLines="1"
-
+                    android:textSize="12dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp" />
 

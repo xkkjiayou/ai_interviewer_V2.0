@@ -118,6 +118,7 @@ public class Job_Index_maintop_Fragment extends Fragment implements View.OnClick
         btn_search = view.findViewById(R.id.btn_job_search);
         btn_search.setOnClickListener(this);
         et_content = view.findViewById(R.id.et_searchcontent);
+        et_content.clearFocus();
         Bundle bundle = getArguments();
         joblist = ((JobList) bundle.getSerializable("joblist")).getJobList();
         data = getData();
